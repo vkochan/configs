@@ -28,3 +28,4 @@ command! -complete=shellcmd -nargs=+ Shell call s:ExecuteInShell(<q-args>)
 
 set title
 set switchbuf=newtab
+set cursorline
