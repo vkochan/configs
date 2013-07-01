@@ -8,7 +8,12 @@ colorscheme desert
 nmap <C-Right> :tabnext<CR>
 nmap <C-Left> :tabprev<CR>
 nmap gn :tabnew<CR>
-nmap <C-x> :quit<CR>
+" nmap <C-x> :quit<CR>
+
+"nmap <C-W><Left> :vertical resize -5<cr>
+"nmap <C-W><Down> :resize -5<cr>
+"nmap <C-W><Up> :resize +5<cr>
+"nmap <C-W><Right> :vertical resize +5<cr>
 
 function! s:ExecuteInShell(command)
 	let command = join(map(split(a:command), 'expand(v:val)'))
@@ -28,3 +33,4 @@ command! -complete=shellcmd -nargs=+ Shell call s:ExecuteInShell(<q-args>)
 
 set title
 set switchbuf=newtab
+set shiftwidth=4 softtabstop=4 expandtab
