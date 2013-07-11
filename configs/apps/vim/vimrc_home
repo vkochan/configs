@@ -1,3 +1,10 @@
+filetype off
+
+call pathogen#infect('~/.vim/bundle/{}')
+call pathogen#helptags()
+call pathogen#incubate()
+
+filetype plugin indent on
 syntax on
 
 set number
@@ -29,3 +36,5 @@ command! -complete=shellcmd -nargs=+ Shell call s:ExecuteInShell(<q-args>)
 set title
 set switchbuf=newtab
 set cursorline
+
+nnoremap <Leader>tl :TlistToggle<CR>
