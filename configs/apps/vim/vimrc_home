@@ -46,3 +46,6 @@ set cursorline
 "#################### Taglist ####################
 nnoremap <Leader>tl :TlistToggle<CR>
 let Tlist_Show_One_File = 1
+
+"#################### NERDTree ####################
+nmap <Leader>fl :NERDTree<CR>
