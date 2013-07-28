@@ -43,4 +43,6 @@ set switchbuf=newtab
 set shiftwidth=4 softtabstop=4 expandtab
 set cursorline
 
+"#################### Taglist ####################
 nnoremap <Leader>tl :TlistToggle<CR>
+let Tlist_Show_One_File = 1
