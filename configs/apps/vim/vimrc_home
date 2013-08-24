@@ -49,4 +49,4 @@ let Tlist_Show_One_File = 1
 let Tlist_Use_Right_Window = 1
 
 "#################### NERDTree ####################
-nmap <Leader>fl :NERDTree<CR>
+nmap <Leader>fl :NERDTreeTabsOpen<CR>
