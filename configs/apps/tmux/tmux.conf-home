@@ -1,10 +1,45 @@
 unbind C-b
 set -g prefix C-a
+bind a send-prefix
 setw -g mode-keys vi
 setw -g utf8 on
 
+set -g status-keys vi
+setw -g mode-keys vi
+
 bind y run "tmux show-buffer | xclip -i"
 
-#unbind %
-#bind | split-window -h
-#bind – split-window -v
+unbind %
+bind | split-window -h
+bind - split-window -v
+
+set -g history-limit 10000
+
+#bind -n S-down new-window
+#bind -n S-left prev
+#bind -n S-right next
+#bind -n C-left swap-window -t -1
+#bind -n C-right swap-window -t +1
+
+#mouse settings
+setw -g mode-mouse on
+set -g mouse-select-pane on
+set -g mouse-resize-pane on
+set -g mouse-select-window on
+
+#setw -g monitor-activity on
+#set -g visual-activity on
+
+# keybindings to make resizing easier
+bind -r C-h resize-pane -L
+bind -r C-j resize-pane -D
+bind -r C-k resize-pane -U
+bind -r C-l resize-pane -R
+
+# Vim style pane selection
+bind h select-pane -L
+bind j select-pane -D 
+bind k select-pane -U
+bind l select-pane -R
+
+set-window-option -g window-status-current-bg red
