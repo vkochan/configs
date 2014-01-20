@@ -15,11 +15,9 @@ bind - split-window -v
 
 set -g history-limit 10000
 
-#bind -n S-down new-window
-#bind -n S-left prev
-#bind -n S-right next
-#bind -n C-left swap-window -t -1
-#bind -n C-right swap-window -t +1
+#bind w-n new-window
+bind -r C-n next
+bind -r C-p prev
 
 #mouse settings
 setw -g mode-mouse on
