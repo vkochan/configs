@@ -40,4 +40,7 @@ bind j select-pane -D
 bind k select-pane -U
 bind l select-pane -R
 
+bind-key -t vi-copy 'v' begin-selection
+bind-key -t vi-copy 'y' copy-selection
+
 set-window-option -g window-status-current-bg red
