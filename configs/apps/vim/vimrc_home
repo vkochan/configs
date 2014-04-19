@@ -39,7 +39,7 @@ endfunction
 command! -complete=shellcmd -nargs=+ Shell call s:ExecuteInShell(<q-args>)
 
 set title
-set switchbuf=newtab
+"set switchbuf=newtab
 set shiftwidth=4 softtabstop=4 expandtab
 set cursorline
 
@@ -50,3 +50,7 @@ let Tlist_Use_Right_Window = 1
 
 "#################### NERDTree ####################
 nmap <Leader>fl :NERDTreeTabsOpen<CR>
+"################### AsyncCommand ################
+nmap <Leader>ash :AsyncShell
+nmap <Leader>agr :AsyncGrep
+nmap <Leader>amk :AsyncMake
