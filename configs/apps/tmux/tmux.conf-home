@@ -1,34 +1,40 @@
+# start window index of 1
+set-option -g base-index 1
+setw -g pane-base-index 1
+
+#supposedly fixes pausing in vim
+set-option -sg escape-time 0
+
+# Act like GNU screen
 unbind C-b
 set -g prefix C-a
 bind a send-prefix
+
+# Reload tmux config file
+bind r source-file ~/.tmux.conf
+
+# VI mode
 setw -g mode-keys vi
 setw -g utf8 on
-
 set -g status-keys vi
 setw -g mode-keys vi
+bind-key -t vi-copy 'v' begin-selection
+bind-key -t vi-copy 'y' copy-selection
 
-bind y run "tmux show-buffer | xclip -i"
-
-unbind %
-bind | split-window -h
-bind - split-window -v
-
+# Look good
+set -g default-terminal "screen-256color"
 set -g history-limit 10000
+setw -g xterm-keys on
 
-#bind w-n new-window
-bind -r C-n next
-bind -r C-p prev
+# Panes
+unbind %
+bind v split-window -h
+bind s split-window -v
+bind-key = select-layout even-vertical
+bind-key | select-layout even-horizontal
+bind-key z resize-pane -Z
 
-#mouse settings
-setw -g mode-mouse on
-set -g mouse-select-pane on
-set -g mouse-resize-pane on
-set -g mouse-select-window on
-
-#setw -g monitor-activity on
-#set -g visual-activity on
-
-# keybindings to make resizing easier
+# Keybindings to make resizing easier
 bind -r C-h resize-pane -L
 bind -r C-j resize-pane -D
 bind -r C-k resize-pane -U
@@ -39,8 +45,34 @@ bind h select-pane -L
 bind j select-pane -D 
 bind k select-pane -U
 bind l select-pane -R
+set -g history-limit 10000
 
-bind-key -t vi-copy 'v' begin-selection
-bind-key -t vi-copy 'y' copy-selection
+# Panes borders
+set-option -g pane-border-fg green
+set-option -g pane-border-bg black
+set-option -g pane-active-border-fg white
+set-option -g pane-active-border-bg yellow
 
-set-window-option -g window-status-current-bg red
+# Window
+unbind .
+unbind ,
+bind -r , next
+bind -r . prev
+unbind n
+bind n command-prompt "rename-window %%"
+
+# Pipe pane to log file
+#bind-key P pipe-pane -o "cat >>$HOME/#W-tmux.log" \; display-message "Toggled logging to $HOME/#W-tmux.log"
+
+# Mouse settings
+#setw -g mode-mouse on
+#set -g mouse-select-pane on
+#set -g mouse-resize-pane on
+#set -g mouse-select-window on
+
+#setw -g monitor-activity on
+#set -g visual-activity on
+
+# Linux clipboard support
+#bind C-p run "tmux set-buffer \"$(xclip -o -selection clipboard)\"; tmux paste-buffer"
+#bind C-y run "tmux save-buffer - | xclip -i -selection clipboard"
