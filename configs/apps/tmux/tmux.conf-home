@@ -11,7 +11,7 @@ set -g prefix C-a
 bind a send-prefix
 
 # Reload tmux config file
-bind r source-file ~/.tmux.conf
+bind r source-file ~/.tmux.conf \; display-message "Config reloaded..."
 
 # VI mode
 setw -g mode-keys vi
@@ -76,3 +76,15 @@ bind n command-prompt "rename-window %%"
 # Linux clipboard support
 #bind C-p run "tmux set-buffer \"$(xclip -o -selection clipboard)\"; tmux paste-buffer"
 #bind C-y run "tmux save-buffer - | xclip -i -selection clipboard"
+#
+#
+
+#Status
+set-window-option -g window-status-format "#I:#W"
+set-window-option -g window-status-fg white
+set-window-option -g window-status-bg blue
+
+set-window-option -g window-status-current-fg white
+set-window-option -g window-status-current-bg red
+set-window-option -g status-right-fg white
+set-window-option -g status-right-bg blue
