@@ -10,3 +10,8 @@ function my_netns {
 }
 
 PS1="[\u@\h \W$(my_netns)]\$ "
+
+alias git_diff="git difftool --tool=vimdiff"
+alias ls='ls --color=auto'
+alias psc='ps xwaf -eo pid,user,cgroup,args'
+alias o='xdg-open'
