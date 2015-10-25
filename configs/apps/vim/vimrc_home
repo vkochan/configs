@@ -10,12 +10,10 @@ syntax on
 set number
 set hlsearch
 
-colorscheme desert
+colorscheme evening
 
-nmap <C-Right> :tabnext<CR>
-nmap <C-Left> :tabprev<CR>
+nmap <TAB> :tabnext<CR>
 nmap gn :tabnew<CR>
-" nmap <C-x> :quit<CR>
 
 "nmap <C-W><Left> :vertical resize -5<cr>
 "nmap <C-W><Down> :resize -5<cr>
@@ -50,10 +48,6 @@ let Tlist_Use_Right_Window = 1
 "#################### NERDTree ####################
 nmap <Leader>fl :NERDTreeTabsOpen<CR>
 "################### AsyncCommand ################
-nmap <Leader>ash :AsyncShell
-nmap <Leader>agr :AsyncGrep
-nmap <Leader>amk :AsyncMake
-
 
 " VIM backup settings
 set noswapfile
@@ -66,7 +60,7 @@ nnoremap <Leader>ga :Git add %:p<CR><CR>
 nnoremap <Leader>gs :Gstatus<CR>
 nnoremap <Leader>gc :Gcommit -v -q<CR>
 nnoremap <Leader>gt :Gcommit -v -q %:p<CR>
-nnoremap <Leader>gd :Gdiff<CR>
+nnoremap <Leader>gd :Gvdiff<CR>
 nnoremap <Leader>ge :Gedit<CR>
 nnoremap <Leader>gr :Gread<CR>
 nnoremap <Leader>gw :Gwrite<CR><CR>
