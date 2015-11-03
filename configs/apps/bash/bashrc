@@ -10,6 +10,7 @@ PS1="[\u@\h \W$(my_netns)]\$ "
 
 alias git_diff="git difftool --tool=vimdiff --no-prompt"
 alias git_ls='git show --name-only --pretty="format:"'
+alias git_short='git log --pretty=oneline'
 
 alias ls="ls --color=auto"
 alias grep="grep -n --color"
