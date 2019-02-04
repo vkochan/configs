@@ -88,3 +88,5 @@ set-window-option -g window-status-current-fg white
 set-window-option -g window-status-current-bg red
 set-window-option -g status-right-fg white
 set-window-option -g status-right-bg blue
+
+run-shell ~/.config/tmux/plugins/tmux-resurrect/resurrect.tmux
