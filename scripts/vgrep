@@ -1,0 +1,3 @@
+#! /bin/sh
+
+vim -c ":copen" -q <(grep -rnI $@)
