@@ -68,8 +68,12 @@ main() {
     build_dir="${AUTOBUILD_DIR}/${prefix}${build_id}"
     makeargs="O=${build_dir}/output -C ${br_dir}"
     
+    # wget -R index.htm* -nH -l 1 --recursive --no-parent \
+    #         --directory-prefix=${AUTOBUILD_DIR} \
+    #         ${AUTOBUILD_URL}/results/${build_id}
+
     mkdir -p ${build_dir}
-    
+
     for f in "branch" "build-end.log" "build-time.log" "config" "defconfig" "gitid" "status" "submitter"; do
         wget ${AUTOBUILD_URL}/results/${build_id}/${f} --output-document ${build_dir}/${f}
     done
