@@ -142,5 +142,6 @@ bind generic,index,pager / search
 bind generic,index,pager % shell-escape # mnemonic: zsh standard prompt
 bind generic \Cl refresh # this is default and same as vim
 bind index,pager @ display-address # defaul mutt
+bind index L limit
 
 my_hdr BCc: <vadim4j@gmail.com>
