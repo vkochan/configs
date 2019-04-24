@@ -4,9 +4,9 @@ source ~/.mutt/mutt-colors-solarized/mutt-colors-solarized-dark-16.muttrc
 # email settings
 set from = vadim4j@gmail.com
 set imap_user = vadim4j@gmail.com
-set imap_pass = pass
+set imap_pass =
 set smtp_url = smtp://vadim4j@smtp.gmail.com:587/
-set smtp_pass = pass
+set smtp_pass =
 
 # don't let your firewall kill your idle connection
 set imap_keepalive  = 900
