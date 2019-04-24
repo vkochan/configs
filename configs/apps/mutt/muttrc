@@ -37,6 +37,8 @@ set sort="threads"
 set sort_browser="reverse-date"
 set record="=Sent"
 
+auto_view text/html
+
 # changing folders ----------------------------------------------------
 macro index,pager gi "<change-folder>!<enter>" "Go to inbox"
 macro index,pager gl "<change-folder>^<enter>" "Go to last"
