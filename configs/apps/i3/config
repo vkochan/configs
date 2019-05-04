@@ -35,7 +35,8 @@ font pango:monospace 14
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+set $term --no-startup-id $TERMINAL
+bindsym $mod+Return exec $term
 
 # kill focused window
 bindsym $mod+Shift+q kill
