@@ -21,3 +21,5 @@ alias uzbl=uzbl-tabbed
 alias unterm="perl -pe 's/\e([^\[\]]|\[.*?[a-zA-Z]|\].*?\a)//g' | col -b"
 
 export TERMINAL="st"
+export EDITOR="vim"
+export PAGER="more"
