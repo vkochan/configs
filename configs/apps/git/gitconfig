@@ -1,0 +1,11 @@
+[user]
+	email = vadim4j@gmail.com
+	name = Vadim Kochan
+
+[sendemail]
+	from = Vadim Kochan <vadim4j@gmail.com>
+	smtpserver = smtp.gmail.com
+	smtpuser = vadim4j@gmail.com
+	smtpencryption = tls
+	chainreplyto = false
+	smtpserverport = 587
