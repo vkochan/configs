@@ -110,9 +110,16 @@ interval=30
 
 # Date Time
 #
+[date]
+label=📅
+command=date '+%Y-%m-%d'
+interval=3600
+
 [time]
-command=date '+%Y-%m-%d %H:%M:%S'
+label=⌚
+command=date '+%H:%M:%S'
 interval=5
+color=#FF00FF
 
 # Generic media player support
 #
