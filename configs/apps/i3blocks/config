@@ -34,8 +34,7 @@ markup=none
 # The second parameter overrides the mixer selection
 # See the script for details.
 [volume]
-label=VOL
-#label=♪
+label=♫
 instance=Master
 #instance=PCM
 interval=once
@@ -45,7 +44,7 @@ signal=10
 #
 # The type defaults to "mem" if the instance is not specified.
 [memory]
-label=MEM
+label=▓
 separator=false
 interval=30
 
@@ -102,7 +101,8 @@ min_width=CPU: 100.00%
 # The battery instance defaults to 0.
 [battery]
 label=BAT
-#label=⚡
+label=⚡
+color=#0000FF
 #instance=1
 interval=30
 
