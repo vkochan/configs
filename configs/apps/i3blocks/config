@@ -121,6 +121,10 @@ command=date '+%H:%M:%S'
 interval=5
 color=#FF00FF
 
+[temperature]
+interval=10
+color=#FF0000
+
 # Generic media player support
 #
 # This displays "ARTIST - SONG" if a music is playing.
@@ -141,10 +145,6 @@ color=#FF00FF
 # Support multiple chips, though lm-sensors.
 # The script may be called with -w and -c switches to specify thresholds,
 # see the script for details.
-#[temperature]
-#label=TEMP
-#interval=10
-
 # Key indicators
 #
 # Add the following bindings to i3 config file:
