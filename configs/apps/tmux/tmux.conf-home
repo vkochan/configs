@@ -18,8 +18,8 @@ setw -g mode-keys vi
 setw -g utf8 on
 set -g status-keys vi
 setw -g mode-keys vi
-bind-key -t vi-copy 'v' begin-selection
-bind-key -t vi-copy 'y' copy-selection
+bind -Tcopy-mode-vi v send -X begin-selection
+bind -Tcopy-mode-vi y send -X copy-selection
 
 # Look good
 set -g default-terminal "screen-256color"
