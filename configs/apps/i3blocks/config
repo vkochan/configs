@@ -39,7 +39,7 @@ signal=10
 # The second parameter overrides the mixer selection
 # See the script for details.
 [volume]
-label=♫
+label=🔊
 instance=Master
 #instance=PCM
 interval=once
