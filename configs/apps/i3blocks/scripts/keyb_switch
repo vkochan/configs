@@ -1,0 +1,11 @@
+#/bin/sh
+
+LANG=`setxkbmap -query | grep layout | awk -F':' '{ print $2; }' | sed -e 's/[ \t]\?//g'`
+
+if [ "$LANG" = "us" ]; then
+    setxkbmap ua
+else
+    setxkbmap us
+fi
+
+pkill i3blocks -RTMIN+10

@@ -28,6 +28,11 @@ command=/usr/lib/i3blocks/$BLOCK_NAME
 separator_block_width=15
 markup=none
 
+[keyb]
+command=~/.config/i3blocks/scripts/keyb_layout
+interval=once
+signal=10
+
 # Volume indicator
 #
 # The first parameter sets the step (and units to display)
@@ -38,7 +43,7 @@ label=♫
 instance=Master
 #instance=PCM
 interval=once
-signal=10
+signal=11
 
 # Memory usage
 #
