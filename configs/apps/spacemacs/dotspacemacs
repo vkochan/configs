@@ -294,6 +294,7 @@ values."
    ))
 
 (defun dotspacemacs/user-init ()
+  (setq-default hybrid-style-enable-hjkl-bindings t)
   "Initialization function for user code.
 It is called immediately after `dotspacemacs/init', before layer configuration
 executes.
