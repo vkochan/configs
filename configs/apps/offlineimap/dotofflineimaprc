@@ -1,0 +1,19 @@
+[general]
+ui = ttyui
+accounts = Gmail
+
+[Account Gmail]
+localrepository = Gmail-Local
+remoterepository = Gmail-Remote
+
+[Repository Gmail-Local]
+type = Maildir
+localfolders = ~/Maildir
+
+[Repository Gmail-Remote]
+type = Gmail
+remoteuser = vadim4j@gmail.com
+realdelete = no
+maxconnections = 3
+folderfilter = lambda foldername: foldername in ['[Gmail]/All Mail', '[Gmail]/Sent Mail']
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
