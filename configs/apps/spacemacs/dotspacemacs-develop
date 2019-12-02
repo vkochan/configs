@@ -54,6 +54,7 @@ This function should only modify configuration layer settings."
      ;; syntax-checking
      neotree
      ;; version-control
+     (mu4e :variables mu4e-installation-path "/usr/share/emacs/site-lisp/mu4e")
      )
 
    ;; List of additional packages that will be installed without being
