@@ -454,7 +454,6 @@ configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
     (setq-default hybrid-style-enable-hjkl-bindings t)
-    (setq mu4e-enable-mode-line t)
   )
 
 (defun dotspacemacs/user-load ()
@@ -470,13 +469,15 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
-  (define-key evil-insert-state-map (kbd "TAB") 'tab-to-tab-stop)
-  (setq-default indent-tabs-mode t)
+  ;; (define-key evil-insert-state-map (kbd "TAB") 'tab-to-tab-stop)
+  (setq-default indent-tabs-mode nil)
+  (setq-default c-tab-always-indent nil)
   (setq-default tab-width 8)                ; tabs four spaces wide
   (defvaralias 'c-basic-offset 'tab-width)  ; Set the C/C++/Java.. mode to use this tab width
 
   (setq projectile-switch-project-action 'neotree-projectile-action)
 
+  (setq mu4e-enable-mode-line t)
   (require 'mu4e)
   (setq mail-user-agent 'mu4e-user-agent)
   (setq mu4e-sent-folder   "/[Gmail].Sent Mail")
