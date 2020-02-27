@@ -1,19 +1,31 @@
+#  IMAP config
+# don't let your firewall kill your idle connection
+set imap_keepalive  = 900
+my_hdr From: Vadym Kochan <vadym.kochan@DOMAIN>
+set spoolfile="imaps://vadym.kochan@DOMAIN@outlook.office365.com/INBOX"
+set folder="imaps://vadym.kochan@DOMAIN@outlook.office365.com/"
+set postponed=+Drafts   # mailbox to store postponed messages in
+set record=+"Sent Items"   # default location to save outgoing mail
+
+# SMTP config
+set realname = "Vadym Kochan"
+set from = "vadym.kochan@DOMAIN"
+set hostname = "DOMAIN"
+set smtp_url = "smtp://vadym.kochan@DOMAIN@outlook.office365.com:587/"
+set ssl_force_tls = yes
+set smtp_authenticators = "login"
+
+set delete_untag=no
+set alias_file= ~/.mutt/aliases
+set sort_alias= alias
+set reverse_alias=yes
+source $alias_file
+
 alternative_order text/plain text/enriched text/html
 auto_view text/html
 
 # theme
 source ~/.mutt/mutt-colors-solarized/mutt-colors-solarized-dark-16.muttrc
-
-# don't let your firewall kill your idle connection
-set imap_keepalive  = 900
-set ssl_force_tls = yes
-set smtp_authenticators = "login"
-my_hdr From: Vadym Kochan <account@domain.xxx>
-set spoolfile="imaps://account@domain.xxx@outlook.office365.com/INBOX"
-set folder="imaps://account@domain.xxx@outlook.office365.com/"
-set postponed=+Drafts   # mailbox to store postponed messages in
-set record=+"Sent Items"   # default location to save outgoing mail
-
 
 # do not copy sent mail
 set copy = no
@@ -37,6 +49,8 @@ set sort="threads"
 #set strict_threads="yes"
 set sort_browser="reverse-date"
 set record="=Sent"
+
+auto_view text/html
 
 # changing folders ----------------------------------------------------
 macro index,pager gi "<change-folder>!<enter>" "Go to inbox"
@@ -145,4 +159,4 @@ bind generic \Cl refresh # this is default and same as vim
 bind index,pager @ display-address # defaul mutt
 bind index L limit
 
-my_hdr BCc: <vadim4j@gmail.com>
+my_hdr BCc: <vadym.kochan@DOMAIN>
