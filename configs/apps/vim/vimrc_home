@@ -12,6 +12,8 @@ set hlsearch
 
 colorscheme evening
 
+let mapleader = "\<Space>"
+
 nmap <TAB> :tabnext<CR>
 nmap gn :tabnew<CR>
 
