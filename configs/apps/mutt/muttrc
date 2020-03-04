@@ -129,6 +129,7 @@ bind pager ] skip-quoted
 #bind index,pager n next-undeleted
 #bind index,pager p previous-undeleted
 # message actions -----------------------------------------------------
+bind index S imap-fetch-mail
 bind index <return> display-message # like gmail
 bind generic <return> select-entry # neither vim nor gmail like
 bind pager <return> exit # neither vim nor gmail like, but good
@@ -146,4 +147,6 @@ bind generic \Cl refresh # this is default and same as vim
 bind index,pager @ display-address # defaul mutt
 bind index L limit
 
+set forward_format = "Fwd: %s"       # format of subject when forwarding
+set forward_decode                   # decode when forwarding
 my_hdr BCc: <vadim4j@gmail.com>
