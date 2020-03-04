@@ -89,3 +89,6 @@ nnoremap <Leader>gpl :Dispatch! git pull<CR>
 
 " Search for selected word
 nmap <Leader>s :execute " grep -srnw --binary-files=without-match --exclude-dir=.git . -e " . expand("<cword>") . " " <bar> cwindow<CR>
+
+" Bufexplorer
+nmap <Leader>b :BufExplorer<CR>
