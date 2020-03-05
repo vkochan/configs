@@ -93,3 +93,7 @@ nmap <Leader>s :execute " grep -srnw --binary-files=without-match --exclude-dir=
 " Bufexplorer
 nmap <Leader>b :BufExplorer<CR>
 nmap <Leader>bd :bd<CR>
+
+" how to cursor a line width
+" set cursorline
+" hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white
