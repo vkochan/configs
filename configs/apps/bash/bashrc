@@ -23,3 +23,7 @@ alias unterm="perl -pe 's/\e([^\[\]]|\[.*?[a-zA-Z]|\].*?\a)//g' | col -b"
 export TERMINAL="st"
 export EDITOR="vim"
 export PAGER="more"
+
+# allows to run script from locally installed pip packages
+export PY_USER_BIN=$(python -c 'import site; print(site.USER_BASE + "/bin")')
+export PATH=$PY_USER_BIN:$PATH
