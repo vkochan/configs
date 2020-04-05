@@ -81,6 +81,24 @@ set-window-option -g window-status-format "#I:#W"
 set -g window-status-style fg="white",bg="blue"
 set -g window-status-current-style fg="white",bg="red"
 set -g status-right-style fg="white",bg="blue"
+set -qg status-bg colour40
+
+# Remote session
+bind -T root F12  \
+  set prefix None \;\
+  set key-table off \;\
+  set -qg status-bg colour25 \; \
+  if -F '#{pane_in_mode}' 'send-keys -X cancel' \;\
+  refresh-client -S \;\
+
+bind -T off F12 \
+  set -u prefix \;\
+  set -u key-table \;\
+  set -u status-style \;\
+  set -qg status-bg colour40 \; \
+  set -u window-status-current-style \;\
+  set -u window-status-current-format \;\
+  refresh-client -S
 
 run-shell ~/.config/tmux/plugins/tmux-resurrect/resurrect.tmux
 run-shell ~/.config/tmux/plugins/tmux-continuum/continuum.tmux
