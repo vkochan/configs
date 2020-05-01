@@ -39,11 +39,13 @@ signal=10
 # The second parameter overrides the mixer selection
 # See the script for details.
 [volume]
+command=~/.config/i3blocks/scripts/volume
 label=🔊
-instance=Master
-#instance=PCM
 interval=once
 signal=11
+#STEP=5%
+#MIXER=[determined automatically]
+#SCONTROL=[determined automatically]
 
 # Memory usage
 #
