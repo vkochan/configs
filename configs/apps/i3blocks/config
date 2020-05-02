@@ -109,6 +109,7 @@ min_width=CPU: 100.00%
 #
 # The battery instance defaults to 0.
 [battery]
+command=~/.config/i3blocks/scripts/battery
 label=BAT
 label=⚡
 color=#0000FF
