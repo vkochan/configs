@@ -30,7 +30,7 @@ set include
 # set mail_check = 5
 # editor when press ~v
 set visual = vim
-set my_name = "Vadim Kochan"
+set my_name = "Vadym Kochan"
 set edit_headers = yes
 set sort="threads"
 #set strict_threads="yes"
