@@ -25,6 +25,9 @@ set -g default-terminal "screen-256color"
 set -g history-limit 10000
 setw -g xterm-keys on
 
+# buffers
+bind b choose-buffer
+
 # Panes
 unbind %
 bind v split-window -h
