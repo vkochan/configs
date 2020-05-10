@@ -1,9 +1,9 @@
 [user]
 	email = vadim4j@gmail.com
-	name = Vadim Kochan
+	name = Vadym Kochan
 
 [sendemail]
-	from = Vadim Kochan <vadim4j@gmail.com>
+	from = Vadym Kochan <vadim4j@gmail.com>
 	smtpserver = smtp.gmail.com
 	smtpuser = vadim4j@gmail.com
 	smtpencryption = tls
