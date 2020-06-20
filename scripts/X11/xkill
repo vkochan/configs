@@ -1,0 +1,3 @@
+#!/bin/sh
+
+pkill -15 -t tty"$XDG_VTNR" Xorg
