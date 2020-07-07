@@ -1,0 +1,16 @@
+#!/bin/sh
+
+USER_HOST=$1
+
+if [ -z "$1" ]; then
+	printf "error: please specify user@hostname parameter\n"
+	exit 1
+fi
+
+ssh-keygen -t rsa
+
+ssh ${USER_HOST} mkdir -p ~/.ssh
+
+cat ~/.ssh/id_rsa.pub | ssh ${USER_HOST} 'cat >> .ssh/authorized_keys'
+
+ssh ${USER_HOST} "chmod 700 .ssh; chmod 640 .ssh/authorized_keys"
