@@ -1,0 +1,5 @@
+#!/bin/sh
+
+video_res=$(xdpyinfo | awk '/dimensions/{print $2}')
+
+ffmpeg -video_size ${video_res} -framerate 25 -f x11grab -i $DISPLAY record.mp4
