@@ -1,0 +1,19 @@
+(specifications->manifest
+   '("emacs" 
+     "qutebrowser"
+     "tmux"
+     "dwm"
+     "vis"
+     "dvtm"
+     "vim"
+     "iproute2"
+     "wpa-supplicant-minimal"
+     "i3-gaps"
+     "i3blocks"
+     "i3status"
+     "git"
+     "perl"
+     "python"
+     "neomutt"
+    )
+)
