@@ -15,5 +15,6 @@
      "perl"
      "python"
      "neomutt"
+     "gcc-toolchain"
     )
 )
