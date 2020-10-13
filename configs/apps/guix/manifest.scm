@@ -1,11 +1,17 @@
 (specifications->manifest
-   '("emacs" 
+   '(
+     "cmus"
+     "mupdf"
      ;; "qutebrowser"
      "tmux"
      "dwm"
      "vis"
      "dvtm"
+     "emacs" 
      "vim"
+     "iw"
+     "net-tools"
+     "wireless-tools"
      "iproute2"
      "wpa-supplicant-minimal"
      "i3-gaps"
@@ -18,8 +24,5 @@
      "neomutt"
      "gcc-toolchain"
      "nss-certs"
-     "iw"
-     "net-tools"
-     "wireless-tools"
     )
 )
