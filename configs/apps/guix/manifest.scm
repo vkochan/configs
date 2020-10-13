@@ -1,6 +1,6 @@
 (specifications->manifest
    '("emacs" 
-     "qutebrowser"
+     ;; "qutebrowser"
      "tmux"
      "dwm"
      "vis"
@@ -17,5 +17,8 @@
      "neomutt"
      "gcc-toolchain"
      "nss-certs"
+     "iw"
+     "net-tools"
+     "wireless-tools"
     )
 )
