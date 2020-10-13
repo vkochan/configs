@@ -16,5 +16,6 @@
      "python"
      "neomutt"
      "gcc-toolchain"
+     "nss-certs"
     )
 )
