@@ -14,6 +14,7 @@
      "git"
      "perl"
      "python"
+     "guile"
      "neomutt"
      "gcc-toolchain"
      "nss-certs"
