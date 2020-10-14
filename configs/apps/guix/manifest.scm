@@ -26,5 +26,6 @@
      "neomutt"
      "gcc-toolchain"
      "nss-certs"
+     "glibc-utf8-locales"
     )
 )
