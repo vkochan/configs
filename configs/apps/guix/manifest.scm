@@ -22,6 +22,7 @@
      "python"
      "guile"
      "guile-readline"
+     "guile-colorized"
      "neomutt"
      "gcc-toolchain"
      "nss-certs"
