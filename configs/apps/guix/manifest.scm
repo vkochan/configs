@@ -21,6 +21,7 @@
      "perl"
      "python"
      "guile"
+     "guile-readline"
      "neomutt"
      "gcc-toolchain"
      "nss-certs"
