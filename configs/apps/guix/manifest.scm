@@ -27,5 +27,9 @@
      "gcc-toolchain"
      "nss-certs"
      "glibc-utf8-locales"
+     "fontconfig"
+     "gs-fonts"
+     "font-dejavu"
+     "font-gnu-freefont-ttf"
     )
 )
