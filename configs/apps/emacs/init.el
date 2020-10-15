@@ -206,6 +206,14 @@
   "bb"  'counsel-switch-buffer
   "bd"  'bury-buffer)
 
+(my-leader-def
+  "e"   '(:ignore t :which-key "eval")
+  "eb"  '(eval-buffer :which-key "eval buffer"))
+
+(my-leader-def
+  :keymaps '(visual)
+  "er" '(eval-region :which-key "eval region"))
+
 (use-package dired
   :ensure nil
   :defer 1
