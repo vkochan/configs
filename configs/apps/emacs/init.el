@@ -59,6 +59,7 @@
   (setq evil-want-C-u-scroll t)
   (setq evil-want-C-i-jump nil)
   (setq evil-respect-visual-line-mode t)
+  (setq evil-symbol-word-search t)
   :config
   (add-hook 'evil-mode-hook 'dw/evil-hook)
   (evil-mode 1)
