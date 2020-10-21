@@ -31,6 +31,7 @@
      "guile-readline"
      "guile-colorized"
      "mu"
+     "isync"
      "neomutt"
      "gcc-toolchain"
      "nss-certs"
