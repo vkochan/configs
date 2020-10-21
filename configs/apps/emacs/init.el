@@ -320,6 +320,7 @@
 
 (my-leader-def
   "g"   '(:ignore t :which-key "git")
+  "gB"  'magit-blame
   "gs"  'magit-status
   "gd"  'magit-diff-unstaged
   "gc"  'magit-branch-or-checkout
