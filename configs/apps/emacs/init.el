@@ -355,4 +355,5 @@
   "pF"  'counsel-projectile-rg
   "pp"  'counsel-projectile
   "pc"  'projectile-compile-project
-  "pd"  'projectile-dired)
+  "pd"  'projectile-dired
+  "pg"  'projectile-grep)
