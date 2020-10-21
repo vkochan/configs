@@ -352,8 +352,9 @@
 (my-leader-def
   "pf"  'counsel-projectile-find-file
   "ps"  'counsel-projectile-switch-project
-  "pF"  'counsel-projectile-rg
   "pp"  'counsel-projectile
   "pc"  'projectile-compile-project
-  "pd"  'projectile-dired
-  "pg"  'projectile-grep)
+  "po"  'projectile-dired
+  "pg"  'projectile-grep
+  "pa"  'projectile-add-known-project
+  "pd"  'projectile-remove-known-project)
