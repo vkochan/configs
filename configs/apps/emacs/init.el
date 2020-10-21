@@ -215,6 +215,13 @@
   :keymaps '(visual)
   "er" '(eval-region :which-key "eval region"))
 
+(defun my-dired-touch (filename)
+  (interactive (list (read-string "Filename: " "new")))
+  (with-temp-buffer
+    (write-file filename))
+  (revert-buffer))
+
+
 (use-package dired
   :ensure nil
   :defer 1
@@ -232,7 +239,8 @@
     (lambda ()
 	 (interactive)
 	 (dired-omit-mode 1)
-	 (hl-line-mode 1))))
+	 (hl-line-mode 1)))
+  (define-key dired-mode-map (kbd "C-c") 'my-dired-touch))
 
 (use-package dired-rainbow
   :defer 2
