@@ -16,6 +16,7 @@
      "emacs" 
      "vim"
      "iw"
+     "gnutls"
      "net-tools"
      "wireless-tools"
      "iproute2"
