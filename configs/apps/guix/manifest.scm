@@ -30,6 +30,7 @@
      "guile"
      "guile-readline"
      "guile-colorized"
+     "mu"
      "neomutt"
      "gcc-toolchain"
      "nss-certs"
