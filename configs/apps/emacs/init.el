@@ -435,6 +435,10 @@
 
 (dark/doom)
 
+(use-package doom-modeline
+	     :defer 0.1
+	     :config (doom-modeline-mode))
+
 (use-package message
 	     :ensure nil
 	     :custom (send-mail-function 'smtpmail-send-it))
