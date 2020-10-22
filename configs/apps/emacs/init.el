@@ -242,6 +242,7 @@
 
 (my-leader-def
   "r"   '(ivy-resume :which-key "ivy resume")
+  "m"   '(mu4e :which-key "mail")
   "f"   '(:ignore t :which-key "files")
   "ff"  '(counsel-find-file :which-key "open file")
   "C-f" 'counsel-find-file
