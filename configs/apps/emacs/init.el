@@ -41,6 +41,10 @@
       mouse-wheel-progressive-speed nil
       mouse-wheel-follow-mouse 't)
 
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+
 ;; UTF-8 as default encoding
 (set-language-environment "utf-8")
 (prefer-coding-system 'utf-8)
