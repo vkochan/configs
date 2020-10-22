@@ -434,3 +434,43 @@
 )
 
 (dark/doom)
+
+(use-package message
+	     :ensure nil
+	     :custom (send-mail-function 'smtpmail-send-it))
+
+(defun mail/work ()
+  (require 'mu4e)
+  (require 'mu4e-contrib)
+
+  (use-package smtpmail
+	       :ensure nil
+	       :custom
+	       (smtpmail-smtp-server "smtp.office365.com")
+	       (smtpmail-smtp-service 587)
+	       (smtpmail-smtp-user "vadym.kochan@plvision.eu")
+	       (smtpmail-stream-type 'starttls))
+
+  (setq	     mu4e-attachment-dir "~/Downloads"
+	     mu4e-confirm-quit nil
+	     mu4e-compose-dont-reply-to-self t
+	     mu4e-compose-signature-auto-include nil
+	     mu4e-get-mail-command "mbsync -a"
+	     mu4e-index-update-in-background t
+	     mu4e-html2text-command 'mu4e-shr2text
+	     mu4e-maildir (expand-file-name "~/.mail/work")
+	     mu4e-maildir-shortcuts
+	     '( ("/Inbox" . ?i)
+	       ("/Archive" . ?a)
+	       ("/Drafts" . ?d)
+	       ("/Deleted Items" . ?t)
+	       ("/Sent Items" . ?s))
+	     mu4e-update-interval 60
+	     mu4e-use-fancy-chars t
+	     mu4e-view-show-addresses t
+	     mu4e-view-show-images t
+	     message-send-mail-function 'smtpmail-send-it
+	     message-kill-buffer-on-exit t
+	     user-mail-address "vadym.kochan@plvision.eu"))
+
+(mail/work)
