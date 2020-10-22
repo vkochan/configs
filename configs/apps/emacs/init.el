@@ -35,6 +35,12 @@
 
 (fset 'yes-or-no-p 'y-or-n-p)
 
+(setq scroll-step            1
+      scroll-conservatively  10000
+      mouse-wheel-scroll-amount '(1 ((shift) . 1))
+      mouse-wheel-progressive-speed nil
+      mouse-wheel-follow-mouse 't)
+
 ;; UTF-8 as default encoding
 (set-language-environment "utf-8")
 (prefer-coding-system 'utf-8)
