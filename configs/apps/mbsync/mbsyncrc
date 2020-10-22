@@ -1,0 +1,31 @@
+IMAPAccount work
+Host outlook.office365.com
+User vadym.kochan@plvision.eu
+#PassCmd "gpg --quiet --for-your-eyes-only --no-tty --decrypt ~/.pass/mail/work.gpg"
+# Pass
+SSLType IMAPS
+SSLVersion TLSv1.2
+AuthMechs PLAIN
+CertificateFile ~/.guix-profile/etc/ssl/certs/ca-certificates.crt
+# Increase timeout to avoid o365 IMAP hiccups
+Timeout 120
+PipelineDepth 1
+
+IMAPStore work-remote
+Account work
+
+MaildirStore work-local
+# Note the trailing slash on the Path statement!
+Path ~/.mail/work/
+Inbox ~/.mail/work/Inbox
+SubFolders Legacy
+
+Channel work
+Master :work-remote:
+Slave :work-local:
+#Include everything
+Patterns *
+# Sync changes (creations/deletions) with the server
+Create Both
+Expunge Both
+Sync All
