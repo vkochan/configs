@@ -33,6 +33,8 @@
 ;; Uncomment this to get a reading on packages that get loaded at startup
 ;;(setq use-package-verbose t)
 
+(fset 'yes-or-no-p 'y-or-n-p)
+
 ;; UTF-8 as default encoding
 (set-language-environment "utf-8")
 (prefer-coding-system 'utf-8)
