@@ -33,6 +33,50 @@
 ;; Uncomment this to get a reading on packages that get loaded at startup
 ;;(setq use-package-verbose t)
 
+;; UTF-8 as default encoding
+(set-language-environment "utf-8")
+(prefer-coding-system 'utf-8)
+(setq coding-system-for-read 'utf-8)
+(setq coding-system-for-write 'utf-8)
+
+(setq visible-bell t)             ;; Get rid of the beeps
+
+(when (window-system)
+  (tool-bar-mode 0)               ;; Toolbars were only cool with XEmacs
+  (when (fboundp 'horizontal-scroll-bar-mode)
+    (horizontal-scroll-bar-mode -1))
+  (scroll-bar-mode -1))
+
+(setq scroll-conservatively 10000
+	scroll-preserve-screen-position t)
+
+;; Always kill current buffer with "C-x k"
+(defun bjm/kill-this-buffer ()
+  "Kill the current buffer."
+  (interactive)
+  (kill-buffer (current-buffer))
+  (delete-window))
+
+(global-set-key (kbd "C-x k") 'bjm/kill-this-buffer)
+
+;; save current position when closing the file
+(save-place-mode t)
+
+;; highlight current line
+(global-hl-line-mode +1)
+
+;; this will hide the initial tutorial
+(setq inhibit-startup-message t)
+
+;; Makes *scratch* empty.
+;; (setq initial-scratch-message "")
+
+;; Removes *scratch* from buffer after the mode has been set.
+;; (defun remove-scratch-buffer ()
+;;   (if (get-buffer "*scratch*")
+;;       (kill-buffer "*scratch*")))
+;; (add-hook 'after-change-major-mode-hook 'remove-scratch-buffer)
+
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
 ;; Evil
@@ -367,50 +411,26 @@
   "pa"  'projectile-add-known-project
   "pd"  'projectile-remove-known-project)
 
-(use-package gnus)
-(setq nnml-directory "~/gmail")
-(setq message-directory "~/gmail")
-(setq gnus-ignored-newsgroups "^to\\.\\|^[0-9. ]+\\( \\|$\\)\\|^[\”]\”[#’()]")
-(setq gnus-select-method
-      '(nnimap "gmail"
-	       (nnimap-address "imap.gmail.com")
-	       (nnimap-server-port 993)
-	       (nnimap-stream ssl)))
+(defun dark/doom ()
+  (interactive)
+  (use-package doom-themes
+    :config
+    ;; Global settings (defaults)
+    (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+	  doom-themes-enable-italic t) ; if nil, italics is universally disabled
+    (load-theme 'doom-acario-dark t)
 
-(setq gnus-thread-sort-functions
-            '(gnus-thread-sort-by-most-recent-date
-	               (not gnus-thread-sort-by-number)))
+    ;; Enable flashing mode-line on errors
+    (doom-themes-visual-bell-config)
 
-; NO 'passive
-(setq gnus-use-cache t)
+    ;; Enable custom neotree theme (all-the-icons must be installed!)
+    ;; (doom-themes-neotree-config)
+    ;; or for treemacs users
+    ;; (setq doom-themes-treemacs-theme "doom-colors") ; use the colorful treemacs theme
+    ;; (doom-themes-treemacs-config)
 
-;; Tree view for groups.
-(add-hook 'gnus-group-mode-hook 'gnus-topic-mode)
+    ;; Corrects (and improves) org-mode's native fontification.
+    (doom-themes-org-config))
+)
 
-;; Threads!  I hate reading un-threaded email -- especially mailing
-;; lists.  This helps a ton!
-(setq gnus-summary-thread-gathering-function 'gnus-gather-threads-by-subject)
-
-;; Also, I prefer to see only the top level message.  If a message has
-;; several replies or is part of a thread, only show the first message.
-;; `gnus-thread-ignore-subject' will ignore the subject and
-;; look at 'In-Reply-To:' and 'References:' headers.
-(setq gnus-thread-hide-subtree t)
-(setq gnus-thread-ignore-subject t)
-
-;; Read HTML mail:
-;; You need install the command line web browser 'w3m' and Emacs plugin 'w3m'
-;; manually. It specify the html render as w3m so my setup works on all versions
-;; of Emacs.
-;;
-;; Since Emacs 24+, a default html rendering engine `shr' is provided:
-;;   - It works out of box without any cli program dependency or setup
-;;   - It can render html color
-;; So below line is optional.
-(setq mm-text-html-renderer 'w3m) ; OPTIONAL
-
-;; http://www.gnu.org/software/emacs/manual/html_node/gnus/_005b9_002e2_005d.html
-(setq gnus-use-correct-string-widths nil)
-
-(add-hook 'gnus-article-mode-hook
-	            (lambda () (setq-local widget-button-face nil)))
+(dark/doom)
