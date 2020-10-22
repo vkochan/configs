@@ -437,18 +437,14 @@
 
 (dark/doom)
 
-(use-package doom-modeline
-	     :defer 0.1
-	     :config (doom-modeline-mode))
-
 (use-package message
 	     :ensure nil
 	     :custom (send-mail-function 'smtpmail-send-it))
 
-(defun mail/work ()
-  (require 'mu4e)
-  (require 'mu4e-contrib)
+(require 'mu4e)
+(require 'mu4e-contrib)
 
+(defun mail/work ()
   (use-package smtpmail
 	       :ensure nil
 	       :custom
@@ -480,3 +476,26 @@
 	     user-mail-address "vadym.kochan@plvision.eu"))
 
 (mail/work)
+
+(defun my-mail-status (n) (format "(✉ %s)" n))
+
+(use-package mu4e-alert
+	     :ensure t
+	     :init
+	     (mu4e-alert-enable-mode-line-display)
+	     ; (defun gjstein-refresh-mu4e-alert-mode-line ()
+	     ;   (interactive)
+	     ;   (mu4e~proc-kill)
+	     ;   (mu4e-alert-enable-mode-line-display)
+	     ;   )
+	     ; (run-with-timer 0 60 'gjstein-refresh-mu4e-alert-mode-line)
+	     :custom
+	     (mu4e-alert-modeline-formatter #'my-mail-status)
+	     (mu4e-alert-interesting-mail-query
+	       "flag:unread AND NOT flag:trashed"))
+
+(use-package doom-modeline
+	     :defer 0.5
+	     :config
+	     (setq doom-modeline-mu4e t)
+	     (doom-modeline-mode))
