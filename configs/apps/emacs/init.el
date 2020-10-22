@@ -772,3 +772,8 @@
   "oa"  '(org-agenda :which-key "status")
   "oc"  '(org-capture t :which-key "capture")
   "ox"  '(org-export-dispatch t :which-key "export"))
+
+(use-package git-gutter
+	     :ensure git-gutter-fringe
+	     :hook ((prog-mode . git-gutter-mode)
+		    (org-mode . git-gutter-mode)))
