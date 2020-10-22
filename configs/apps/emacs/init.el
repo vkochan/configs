@@ -500,3 +500,265 @@
 	     :config
 	     (setq doom-modeline-mu4e t)
 	     (doom-modeline-mode))
+
+;; TODO: Mode this to another section
+(setq-default fill-column 80)
+
+;; Turn on indentation and auto-fill mode for Org files
+(defun my/org-mode-setup ()
+  (org-indent-mode)
+  (variable-pitch-mode 1)
+  (auto-fill-mode 0)
+  (visual-line-mode 1)
+  (setq evil-auto-indent nil)
+  (diminish org-indent-mode))
+
+(use-package org
+	     :defer t
+	     :hook (org-mode . my/org-mode-setup)
+	     :config
+	     (setq org-ellipsis " ▾"
+		   org-hide-emphasis-markers t
+		   org-src-fontify-natively t
+		   org-src-tab-acts-natively t
+		   org-edit-src-content-indentation 0
+		   org-hide-block-startup nil
+		   org-src-preserve-indentation nil
+		   org-startup-folded 'content
+		   org-cycle-separator-lines 2)
+
+	     (setq org-modules
+		   '(org-crypt
+		      org-habit
+		      org-bookmark
+		      org-eshell
+		      org-irc))
+
+	     (setq org-refile-targets '((nil :maxlevel . 3)
+					(org-agenda-files :maxlevel . 3)))
+	     (setq org-outline-path-complete-in-steps nil)
+	     (setq org-refile-use-outline-path t)
+
+	     (evil-define-key '(normal insert visual) org-mode-map (kbd "C-j") 'org-next-visible-heading)
+	     (evil-define-key '(normal insert visual) org-mode-map (kbd "C-k") 'org-previous-visible-heading)
+
+	     (evil-define-key '(normal insert visual) org-mode-map (kbd "M-j") 'org-metadown)
+	     (evil-define-key '(normal insert visual) org-mode-map (kbd "M-k") 'org-metaup)
+
+	     (org-babel-do-load-languages
+	       'org-babel-load-languages
+	       '((emacs-lisp . t)
+		 (ledger . t)))
+
+	     (push '("conf-unix" . conf-unix) org-src-lang-modes))
+
+;; Since we don't want to disable org-confirm-babel-evaluate all
+;; of the time, do it around the after-save-hook
+(defun my/org-babel-tangle-dont-ask ()
+  ;; Dynamic scoping to the rescue
+  (let ((org-confirm-babel-evaluate nil))
+    (org-babel-tangle)))
+
+(add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'my/org-babel-tangle-dont-ask
+					      'run-at-end 'only-in-org-mode)))
+
+(use-package org-bullets
+	     :after org
+	     :hook (org-mode . org-bullets-mode)
+	     :custom
+	     (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
+
+;; Replace list hyphen with dot
+(font-lock-add-keywords 'org-mode
+			'(("^ *\\([-]\\) "
+			   (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+
+(dolist (face '((org-level-1 . 1.2)
+		(org-level-2 . 1.1)
+		(org-level-3 . 1.05)
+		(org-level-4 . 1.0)
+		(org-level-5 . 1.1)
+		(org-level-6 . 1.1)
+		(org-level-7 . 1.1)
+		(org-level-8 . 1.1)))
+  (set-face-attribute (car face) nil :font "Cantarell" :weight 'regular :height (cdr face)))
+
+;; Make sure org-indent face is available
+(require 'org-indent)
+
+;; Ensure that anything that should be fixed-pitch in Org files appears that way
+(set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
+(set-face-attribute 'org-code nil   :inherit '(shadow fixed-pitch))
+(set-face-attribute 'org-indent nil :inherit '(org-hide fixed-pitch))
+(set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
+(set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
+(set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
+(set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch)
+
+;; TODO: Others to consider
+;; '(org-document-info-keyword ((t (:inherit (shadow fixed-pitch)))))
+;; '(org-meta-line ((t (:inherit (font-lock-comment-face fixed-pitch)))))
+;; '(org-property-value ((t (:inherit fixed-pitch))) t)
+;; '(org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
+;; '(org-table ((t (:inherit fixed-pitch :foreground "#83a598"))))
+;; '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold :height 0.8))))
+;; '(org-verbatim ((t (:inherit (shadow fixed-pitch))))))
+
+(setq org-directory "~/notes")
+
+(defun my/org-path (path)
+  (expand-file-name path org-directory))
+
+(setq org-journal-dir (my/org-path "Journal/"))
+
+(defun dw/get-todays-journal-file-name ()
+  "Gets the journal file name for today's date"
+  (interactive)
+  (let* ((journal-file-name
+	   (expand-file-name
+	     (format-time-string "%Y/%Y-%2m-%B.org")
+	     org-journal-dir))
+	 (journal-year-dir (file-name-directory journal-file-name)))
+    (if (not (file-directory-p journal-year-dir))
+      (make-directory journal-year-dir))
+    journal-file-name))
+
+(setq org-default-notes-file (my/org-path "Projects.org"))
+
+(setq org-agenda-files
+      (list
+	(my/org-path "Habits.org")
+	(my/org-path "Work.org")
+	(my/org-path "AutoRest.org")
+	(my/org-path "Calendar/Personal.org")
+	(my/org-path "Calendar/Work.org")
+	(my/org-path "Projects.org")))
+;(dw/get-todays-journal-file-name)))
+
+;; Configure custom agenda views
+(setq org-agenda-custom-commands
+      '(("d" "Dashboard"
+	 ((agenda "" ((org-deadline-warning-days 7)))
+	  (todo "PROC" ((org-agenda-overriding-header "Process Tasks")))
+	  (todo "NEXT"
+		((org-agenda-overriding-header "Next Tasks")))
+	  (tags-todo "agenda/ACTIVE" ((org-agenda-overriding-header "Active Projects")))))
+	;; (todo "TODO"
+	;;   ((org-agenda-overriding-header "Unprocessed Inbox Tasks")
+	;;    (org-agenda-files `(,dw/org-inbox-path))
+	;;    (org-agenda-text-search-extra-files nil)))))
+
+	("n" "Next Tasks"
+	 ((todo "NEXT"
+		((org-agenda-overriding-header "Next Tasks")))))
+
+	("p" "Active Projects"
+	 ((agenda "")
+	  (todo "ACTIVE"
+		((org-agenda-overriding-header "Active Projects")
+		 (org-agenda-max-todos 5)
+		 (org-agenda-files org-agenda-files)))))
+	("w" "Workflow Status"
+	 ((todo "WAIT"
+		((org-agenda-overriding-header "Waiting on External")
+		 (org-agenda-files org-agenda-files)))
+	  (todo "REVIEW"
+		((org-agenda-overriding-header "In Review")
+		 (org-agenda-files org-agenda-files)))
+	  (todo "PLAN"
+		((org-agenda-overriding-header "In Planning")
+		 (org-agenda-todo-list-sublevels nil)
+		 (org-agenda-files org-agenda-files)))
+	  (todo "BACKLOG"
+		((org-agenda-overriding-header "Project Backlog")
+		 (org-agenda-todo-list-sublevels nil)
+		 (org-agenda-files org-agenda-files)))
+	  (todo "READY"
+		((org-agenda-overriding-header "Ready for Work")
+		 (org-agenda-files org-agenda-files)))
+	  (todo "ACTIVE"
+		((org-agenda-overriding-header "Active Projects")
+		 (org-agenda-files org-agenda-files)))
+	  (todo "COMPLETED"
+		((org-agenda-overriding-header "Completed Projects")
+		 (org-agenda-files org-agenda-files)))
+	  (todo "CANC"
+		((org-agenda-overriding-header "Cancelled Projects")
+		 (org-agenda-files org-agenda-files)))))
+
+	;; Projects on hold
+	("h" tags-todo "+LEVEL=2/+HOLD"
+	 ((org-agenda-overriding-header "On-hold Projects")
+	  (org-agenda-files org-agenda-files)))
+
+	;; Low-effort next actions
+	("e" tags-todo "+TODO=\"NEXT\"+Effort<15&+Effort>0"
+	 ((org-agenda-overriding-header "Low Effort Tasks")
+	  (org-agenda-max-todos 20)
+	  (org-agenda-files org-agenda-files)))))
+
+;; Configure common tags
+(setq org-tag-alist
+      '((:startgroup)
+	; Put mutually exclusive tags here
+	(:endgroup)
+	("@errand" . ?E)
+	("@home" . ?H)
+	("@work" . ?W)
+	("agenda" . ?a)
+	("planning" . ?p)
+	("publish" . ?P)
+	("batch" . ?b)
+	("note" . ?n)
+	("idea" . ?i)
+	("thinking" . ?t)
+	("recurring" . ?r)))
+
+;; Configure TODO settings
+(setq org-log-done 'time)
+(setq org-log-into-drawer t)
+(setq org-datetree-add-timestamp 'inactive)
+(setq org-habit-graph-column 60)
+(setq org-fontify-whole-heading-line t)
+(setq org-todo-keywords
+      '((sequence "TODO(t)" "NEXT(n)" "PROC" "|" "DONE(d!)")
+	(sequence "BACKLOG(b)" "PLAN(p)" "READY(r)" "ACTIVE(a)" "REVIEW(v)" "WAIT(w@/!)" "HOLD(h)" "|" "COMPLETED(c)" "CANC(k@)")
+	(sequence "GOAL(g)" "|" "ACHIEVED(v)" "MAINTAIN(m)")))
+
+(use-package org-journal
+	     :defer t
+	     :ensure t  ;; Not in Guix yet
+	     :custom
+	     (org-journal-file-type 'daily)
+	     (org-journal-date-format "%B %d, %Y - %A")
+	     (org-journal-dir "~/notes/Journal/")
+	     (org-journal-time-format "%-l:%M %p - ")
+	     (org-journal-file-format "%Y-%m-%d.org")
+	     (org-journal-enable-agenda-integration t))
+
+(defun my/search-org-files ()
+  (interactive)
+  (counsel-rg "" "~/notes" nil "Search Notes: "))
+
+(use-package evil-org
+	       :after org
+	         :hook ((org-mode . evil-org-mode)
+			         (org-agenda-mode . evil-org-mode)
+				          (evil-org-mode . (lambda () (evil-org-set-key-theme '(navigation todo insert textobjects additional)))))
+		   :config
+		     (require 'evil-org-agenda)
+		       (evil-org-agenda-set-keys))
+
+(my-leader-def
+  "o"   '(:ignore t :which-key "org mode")
+
+  "oi"  '(:ignore t :which-key "insert")
+  "oil" '(org-insert-link :which-key "insert link")
+
+  "on"  '(org-toggle-narrow-to-subtree :which-key "toggle narrow")
+
+  "os"  '(my/counsel-rg-org-files :which-key "search notes")
+
+  "oa"  '(org-agenda :which-key "status")
+  "oc"  '(org-capture t :which-key "capture")
+  "ox"  '(org-export-dispatch t :which-key "export"))
