@@ -633,16 +633,11 @@
       (make-directory journal-year-dir))
     journal-file-name))
 
-(setq org-default-notes-file (my/org-path "Projects.org"))
+(setq org-default-notes-file (my/org-path "Project.org"))
 
 (setq org-agenda-files
       (list
-	(my/org-path "Habits.org")
-	(my/org-path "Work.org")
-	(my/org-path "AutoRest.org")
-	(my/org-path "Calendar/Personal.org")
-	(my/org-path "Calendar/Work.org")
-	(my/org-path "Projects.org")))
+	(my/org-path "Project.org")))
 ;(dw/get-todays-journal-file-name)))
 
 ;; Configure custom agenda views
@@ -767,7 +762,7 @@
 
   "on"  '(org-toggle-narrow-to-subtree :which-key "toggle narrow")
 
-  "os"  '(my/counsel-rg-org-files :which-key "search notes")
+  "os"  '(my/search-org-files :which-key "search notes")
 
   "oa"  '(org-agenda :which-key "status")
   "oc"  '(org-capture t :which-key "capture")
