@@ -40,5 +40,8 @@
      "gs-fonts"
      "font-dejavu"
      "font-gnu-freefont-ttf"
+     "texlive-bin"
+     "texlive-pstool"
+     "texlive-latex-base"
     )
 )
