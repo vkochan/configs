@@ -751,13 +751,13 @@
   (counsel-rg "" "~/notes" nil "Search Notes: "))
 
 (use-package evil-org
-	       :after org
-	         :hook ((org-mode . evil-org-mode)
-			         (org-agenda-mode . evil-org-mode)
-				          (evil-org-mode . (lambda () (evil-org-set-key-theme '(navigation todo insert textobjects additional)))))
-		   :config
-		     (require 'evil-org-agenda)
-		       (evil-org-agenda-set-keys))
+	     :after org
+	     :hook ((org-mode . evil-org-mode)
+		    (org-agenda-mode . evil-org-mode)
+		    (evil-org-mode . (lambda () (evil-org-set-key-theme '(navigation todo insert textobjects additional)))))
+	     :config
+	     (require 'evil-org-agenda)
+	     (evil-org-agenda-set-keys))
 
 (my-leader-def
   "o"   '(:ignore t :which-key "org mode")
