@@ -80,15 +80,6 @@
 ;; this will hide the initial tutorial
 (setq inhibit-startup-message t)
 
-;; Makes *scratch* empty.
-;; (setq initial-scratch-message "")
-
-;; Removes *scratch* from buffer after the mode has been set.
-;; (defun remove-scratch-buffer ()
-;;   (if (get-buffer "*scratch*")
-;;       (kill-buffer "*scratch*")))
-;; (add-hook 'after-change-major-mode-hook 'remove-scratch-buffer)
-
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
 ;; Evil
@@ -159,11 +150,6 @@
     :keymaps '(normal insert visual emacs)
     :prefix "SPC"
     :global-prefix "C-SPC"))
-
-;; Theming
-;; (use-package spacegray-theme :defer t)
-;; (use-package doom-themes :defer t)
-;; (load-theme 'doom-palenight t)
 
 ;; Global misc settings
 (setq-default tab-width 8)
@@ -494,12 +480,6 @@
 	     :ensure t
 	     :init
 	     (mu4e-alert-enable-mode-line-display)
-	     ; (defun gjstein-refresh-mu4e-alert-mode-line ()
-	     ;   (interactive)
-	     ;   (mu4e~proc-kill)
-	     ;   (mu4e-alert-enable-mode-line-display)
-	     ;   )
-	     ; (run-with-timer 0 60 'gjstein-refresh-mu4e-alert-mode-line)
 	     :custom
 	     (mu4e-alert-modeline-formatter #'my-mail-status)
 	     (mu4e-alert-interesting-mail-query
@@ -558,13 +538,6 @@
 				  (truncate r) (truncate g) (truncate b)
 				  (or description color)))
 			(format "No Color RGB for %s" color)))))))
-
-	     (setq org-modules
-		   '(org-crypt
-		      org-habit
-		      org-bookmark
-		      org-eshell
-		      org-irc))
 
 	     (setq org-refile-targets '((nil :maxlevel . 3)
 					(org-agenda-files :maxlevel . 3)))
@@ -639,163 +612,12 @@
 			'(("^ *\\([-]\\) "
 			   (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
 
-; (dolist (face '((org-level-1 . 1.2)
-; 		(org-level-2 . 1.1)
-; 		(org-level-3 . 1.05)
-; 		(org-level-4 . 1.0)
-; 		(org-level-5 . 1.1)
-; 		(org-level-6 . 1.1)
-; 		(org-level-7 . 1.1)
-; 		(org-level-8 . 1.1)))
-;   (set-face-attribute (car face) nil :font "Cantarell" :weight 'regular :height (cdr face)))
-
-;; Make sure org-indent face is available
 (require 'org-indent)
-
-;; Ensure that anything that should be fixed-pitch in Org files appears that way
-(set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
-(set-face-attribute 'org-code nil   :inherit '(shadow fixed-pitch))
-(set-face-attribute 'org-indent nil :inherit '(org-hide fixed-pitch))
-(set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
-(set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
-(set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
-(set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch)
-
-;; TODO: Others to consider
-;; '(org-document-info-keyword ((t (:inherit (shadow fixed-pitch)))))
-;; '(org-meta-line ((t (:inherit (font-lock-comment-face fixed-pitch)))))
-;; '(org-property-value ((t (:inherit fixed-pitch))) t)
-;; '(org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
-;; '(org-table ((t (:inherit fixed-pitch :foreground "#83a598"))))
-;; '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold :height 0.8))))
-;; '(org-verbatim ((t (:inherit (shadow fixed-pitch))))))
 
 (setq org-directory "~/notes")
 
 (defun my/org-path (path)
   (expand-file-name path org-directory))
-
-(setq org-journal-dir (my/org-path "Journal/"))
-
-(defun dw/get-todays-journal-file-name ()
-  "Gets the journal file name for today's date"
-  (interactive)
-  (let* ((journal-file-name
-	   (expand-file-name
-	     (format-time-string "%Y/%Y-%2m-%B.org")
-	     org-journal-dir))
-	 (journal-year-dir (file-name-directory journal-file-name)))
-    (if (not (file-directory-p journal-year-dir))
-      (make-directory journal-year-dir))
-    journal-file-name))
-
-(setq org-default-notes-file (my/org-path "Project.org"))
-
-(setq org-agenda-files
-      (list
-	(my/org-path "Project.org")))
-;(dw/get-todays-journal-file-name)))
-
-;; Configure custom agenda views
-(setq org-agenda-custom-commands
-      '(("d" "Dashboard"
-	 ((agenda "" ((org-deadline-warning-days 7)))
-	  (todo "PROC" ((org-agenda-overriding-header "Process Tasks")))
-	  (todo "NEXT"
-		((org-agenda-overriding-header "Next Tasks")))
-	  (tags-todo "agenda/ACTIVE" ((org-agenda-overriding-header "Active Projects")))))
-	;; (todo "TODO"
-	;;   ((org-agenda-overriding-header "Unprocessed Inbox Tasks")
-	;;    (org-agenda-files `(,dw/org-inbox-path))
-	;;    (org-agenda-text-search-extra-files nil)))))
-
-	("n" "Next Tasks"
-	 ((todo "NEXT"
-		((org-agenda-overriding-header "Next Tasks")))))
-
-	("p" "Active Projects"
-	 ((agenda "")
-	  (todo "ACTIVE"
-		((org-agenda-overriding-header "Active Projects")
-		 (org-agenda-max-todos 5)
-		 (org-agenda-files org-agenda-files)))))
-	("w" "Workflow Status"
-	 ((todo "WAIT"
-		((org-agenda-overriding-header "Waiting on External")
-		 (org-agenda-files org-agenda-files)))
-	  (todo "REVIEW"
-		((org-agenda-overriding-header "In Review")
-		 (org-agenda-files org-agenda-files)))
-	  (todo "PLAN"
-		((org-agenda-overriding-header "In Planning")
-		 (org-agenda-todo-list-sublevels nil)
-		 (org-agenda-files org-agenda-files)))
-	  (todo "BACKLOG"
-		((org-agenda-overriding-header "Project Backlog")
-		 (org-agenda-todo-list-sublevels nil)
-		 (org-agenda-files org-agenda-files)))
-	  (todo "READY"
-		((org-agenda-overriding-header "Ready for Work")
-		 (org-agenda-files org-agenda-files)))
-	  (todo "ACTIVE"
-		((org-agenda-overriding-header "Active Projects")
-		 (org-agenda-files org-agenda-files)))
-	  (todo "COMPLETED"
-		((org-agenda-overriding-header "Completed Projects")
-		 (org-agenda-files org-agenda-files)))
-	  (todo "CANC"
-		((org-agenda-overriding-header "Cancelled Projects")
-		 (org-agenda-files org-agenda-files)))))
-
-	;; Projects on hold
-	("h" tags-todo "+LEVEL=2/+HOLD"
-	 ((org-agenda-overriding-header "On-hold Projects")
-	  (org-agenda-files org-agenda-files)))
-
-	;; Low-effort next actions
-	("e" tags-todo "+TODO=\"NEXT\"+Effort<15&+Effort>0"
-	 ((org-agenda-overriding-header "Low Effort Tasks")
-	  (org-agenda-max-todos 20)
-	  (org-agenda-files org-agenda-files)))))
-
-;; Configure common tags
-(setq org-tag-alist
-      '((:startgroup)
-	; Put mutually exclusive tags here
-	(:endgroup)
-	("@errand" . ?E)
-	("@home" . ?H)
-	("@work" . ?W)
-	("agenda" . ?a)
-	("planning" . ?p)
-	("publish" . ?P)
-	("batch" . ?b)
-	("note" . ?n)
-	("idea" . ?i)
-	("thinking" . ?t)
-	("recurring" . ?r)))
-
-;; Configure TODO settings
-(setq org-log-done 'time)
-(setq org-log-into-drawer t)
-(setq org-datetree-add-timestamp 'inactive)
-(setq org-habit-graph-column 60)
-(setq org-fontify-whole-heading-line t)
-(setq org-todo-keywords
-      '((sequence "TODO(t)" "NEXT(n)" "PROC" "|" "DONE(d!)")
-	(sequence "BACKLOG(b)" "PLAN(p)" "READY(r)" "ACTIVE(a)" "REVIEW(v)" "WAIT(w@/!)" "HOLD(h)" "|" "COMPLETED(c)" "CANC(k@)")
-	(sequence "GOAL(g)" "|" "ACHIEVED(v)" "MAINTAIN(m)")))
-
-(use-package org-journal
-	     :defer t
-	     :ensure t  ;; Not in Guix yet
-	     :custom
-	     (org-journal-file-type 'daily)
-	     (org-journal-date-format "%B %d, %Y - %A")
-	     (org-journal-dir "~/notes/Journal/")
-	     (org-journal-time-format "%-l:%M %p - ")
-	     (org-journal-file-format "%Y-%m-%d.org")
-	     (org-journal-enable-agenda-integration t))
 
 (defun my/search-org-files ()
   (interactive)
@@ -828,57 +650,5 @@
 	     :ensure git-gutter-fringe
 	     :hook ((prog-mode . git-gutter-mode)
 		    (org-mode . git-gutter-mode)))
-
-; (setq org-latex-pdf-process
-;       (let
-; 	((cmd (concat "pdflatex -shell-escape -interaction nonstopmode"
-; 		      " -output-directory %o %f")))
-; 	(list cmd
-; 	      "cd %o; if test -r %b.idx; then makeindex %b.idx; fi"
-; 	      cmd
-; 	      cmd)))
-
-;; source: https://lists.gnu.org/archive/html/emacs-orgmode/2013-06/msg00240.html
-(defun my-auto-tex-cmd (backend)
-  "When exporting from .org with latex,
-  automatically run latex, pdflatex, or xelatex as appropriate,
-  using latexmk."
-  (let ((texcmd))
-    (setq texcmd "latexmk -pdf %f")
-    (if (string-match "LATEX_CMD: pdflatex" (buffer-string))
-      (progn
-	(setq texcmd "latexmk -pdf -pdflatex='pdflatex -file-line-error --shell-escape -synctex=1' %f")
-	(setq org-latex-default-packages-alist
-	      '(("AUTO" "inputenc" t)
-		("T1"   "fontenc"   t)
-		(""     "fixltx2e"  nil)
-		(""     "wrapfig"   nil)
-		(""     "soul"      t)
-		(""     "textcomp"  t)
-		(""     "marvosym"  t)
-		(""     "wasysym"   t)
-		(""     "latexsym"  t)
-		(""     "amssymb"   t)
-		(""     "hyperref"  nil)))))
-    (if (string-match "LATEX_CMD: xelatex" (buffer-string))
-      (progn
-	(setq texcmd "latexmk -pdflatex='xelatex -file-line-error --shell-escape -synctex=1' -pdf %f")
-	(setq org-latex-default-packages-alist
-	      '(("" "fontspec" t)
-		("" "xunicode" t)
-		("" "url" t)
-		;; ("" "rotating" t)
-		;; ("" "memoir-article-styles" t)
-		;; ("american" "babel" t)
-		;; ("babel" "csquotes" t)
-		;; ("" "listings" nil)
-		("svgnames" "xcolor" t)
-		("" "soul" t)
-		("xetex, colorlinks=true, urlcolor=FireBrick, plainpages=false, pdfpagelabels, bookmarksnumbered" "hyperref" nil)
-		))
-
-	))
-    (setq org-latex-pdf-process (list texcmd))))
-(add-hook 'org-export-before-parsing-hook 'my-auto-tex-cmd)
 
 (add-to-list 'org-latex-packages-alist '("" "lmodern" t))
