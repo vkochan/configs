@@ -470,7 +470,12 @@
 	     mu4e-view-show-images t
 	     message-send-mail-function 'smtpmail-send-it
 	     message-kill-buffer-on-exit t
-	     user-mail-address "vadym.kochan@plvision.eu"))
+	     user-mail-address "vadym.kochan@plvision.eu")
+
+  (add-hook 'mu4e-compose-mode-hook
+	    (defun my-add-bcc ()
+	      "Add myself in Bcc: header."
+	      (save-excursion (message-add-header (format "Bcc: %s\n" user-mail-address))))))
 
 (mail/work)
 
