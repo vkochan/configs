@@ -520,7 +520,8 @@
 		   org-hide-block-startup nil
 		   org-src-preserve-indentation nil
 		   org-startup-folded 'content
-		   org-cycle-separator-lines 2)
+		   org-cycle-separator-lines 2
+		   org-export-with-sub-superscripts nil)
 
 	     ;; Taken and adapted from org-colored-text
 	     (org-add-link-type
