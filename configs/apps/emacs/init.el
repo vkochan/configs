@@ -658,3 +658,15 @@
 		    (org-mode . git-gutter-mode)))
 
 (add-to-list 'org-latex-packages-alist '("" "lmodern" t))
+
+(setq-default tab-always-indent 'complete)
+
+;; example of a function that just insert a tab char
+(defun my-insert-tab-char ()
+  "insert a tab char. (ASCII 9, \t)"
+  (interactive)
+  (insert "\t")
+)
+
+(global-set-key (kbd "TAB") 'my-insert-tab-char)
+(global-set-key (kbd "<tab>") 'my-insert-tab-char)
