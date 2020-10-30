@@ -477,6 +477,8 @@
 	      "Add myself in Bcc: header."
 	      (save-excursion (message-add-header (format "Bcc: %s\n" user-mail-address))))))
 
+(define-key mu4e-compose-mode-map (kbd "C-c C-x") 'mail-add-attachment)
+
 (mail/work)
 
 (defun my-mail-status (n) (format "(✉ %s)" n))
