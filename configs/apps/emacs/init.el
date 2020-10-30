@@ -657,7 +657,12 @@
 	     :hook ((prog-mode . git-gutter-mode)
 		    (org-mode . git-gutter-mode)))
 
+(add-to-list 'org-latex-packages-alist '("" "listings" nil))
 (add-to-list 'org-latex-packages-alist '("" "lmodern" t))
+(add-to-list 'org-latex-packages-alist '("" "color" t))
+
+(setq org-latex-listings-options '(("breaklines" "true")))
+(setq org-latex-listings t)
 
 (setq-default tab-always-indent 'complete)
 
