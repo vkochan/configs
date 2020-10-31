@@ -477,9 +477,45 @@
 	      "Add myself in Bcc: header."
 	      (save-excursion (message-add-header (format "Bcc: %s\n" user-mail-address))))))
 
-(define-key mu4e-compose-mode-map (kbd "C-c C-x") 'mail-add-attachment)
+(defun mail/private ()
+  (use-package smtpmail
+	       :ensure nil
+	       :custom
+	       (smtpmail-smtp-server "smtp.gmail.com")
+	       (smtpmail-smtp-service 587)
+	       (smtpmail-smtp-user "vadim4j@gmail.com")
+	       (smtpmail-stream-type 'starttls))
 
-(mail/work)
+  (setq	     mu4e-attachment-dir "~/Downloads"
+	     mu4e-confirm-quit nil
+	     mu4e-compose-dont-reply-to-self t
+	     mu4e-compose-signature-auto-include nil
+	     mu4e-get-mail-command "mbsync -a"
+	     mu4e-index-update-in-background t
+	     mu4e-html2text-command 'mu4e-shr2text
+	     mu4e-maildir (expand-file-name "~/.mail/private")
+	     mu4e-maildir-shortcuts
+	     '( ("/INBOX" . ?i)
+	       ("/[Gmail].All Mail" . ?a)
+	       ("/[Gmail].Trash" . ?t)
+	       ("/[Gmail].Sent Mail" . ?s))
+	     mu4e-update-interval 60
+	     mu4e-use-fancy-chars t
+	     mu4e-view-show-addresses t
+	     mu4e-view-show-images t
+	     message-send-mail-function 'smtpmail-send-it
+	     message-kill-buffer-on-exit t
+	     user-mail-address "vadim4j@gmail.com")
+
+  (add-hook 'mu4e-compose-mode-hook
+	    (defun my-add-bcc ()
+	      "Add myself in Bcc: header."
+	      (save-excursion (message-add-header (format "Bcc: %s\n" user-mail-address))))))
+
+; (mail/work)
+(mail/private)
+
+(define-key mu4e-compose-mode-map (kbd "C-c C-x") 'mail-add-attachment)
 
 (defun my-mail-status (n) (format "(✉ %s)" n))
 
