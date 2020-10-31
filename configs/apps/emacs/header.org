@@ -1,0 +1,3 @@
+#+MACRO: NEWLINE @@latex:\\@@ @@html:<br>@@
+#+LATEX_HEADER: \usepackage{hyperref}
+#+LATEX_HEADER: \hypersetup{colorlinks=true,linkcolor=blue}
