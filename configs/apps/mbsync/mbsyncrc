@@ -1,3 +1,4 @@
+## Work
 IMAPAccount work
 Host outlook.office365.com
 User vadym.kochan@plvision.eu
@@ -29,3 +30,38 @@ Patterns *
 Create Both
 Expunge Both
 Sync All
+
+## Private
+IMAPAccount private
+Host imap.gmail.com
+User vadim4j@gmail.com
+SSLType IMAPS
+Timeout 120
+PipelineDepth 1
+AuthMechs LOGIN
+CertificateFile ~/.guix-profile/etc/ssl/certs/ca-certificates.crt
+
+IMAPStore private-remote
+Account private
+
+MaildirStore private-local
+Path ~/.mail/private/
+Inbox ~/.mail/private/inbox
+
+Channel private-inbox
+Master :private-remote:
+Slave :private-local:
+Patterns "INBOX"
+
+Channel private-sent
+Master :private-remote:"[Gmail]/Sent Mail"
+Slave :private-local:sent
+
+Channel private-trash
+Master :private-remote:"[Gmail]/Trash"
+Slave :private-local:trash
+
+Group private
+Channel private-inbox
+Channel private-sent
+Channel private-trash
