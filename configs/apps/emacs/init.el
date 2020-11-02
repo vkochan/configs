@@ -452,12 +452,12 @@
 
   (setq	     mu4e-attachment-dir "~/Downloads"
 	     mu4e-confirm-quit nil
-	     mu4e-compose-dont-reply-to-self t
 	     mu4e-compose-signature-auto-include nil
 	     mu4e-get-mail-command "mbsync -a"
 	     mu4e-index-update-in-background t
 	     mu4e-html2text-command 'mu4e-shr2text
 	     mu4e-maildir (expand-file-name "~/.mail/work")
+             mu4e-compose-keep-self-cc t
 	     mu4e-maildir-shortcuts
 	     '( ("/Inbox" . ?i)
 	       ("/Archive" . ?a)
@@ -470,12 +470,7 @@
 	     mu4e-view-show-images t
 	     message-send-mail-function 'smtpmail-send-it
 	     message-kill-buffer-on-exit t
-	     user-mail-address "vadym.kochan@plvision.eu")
-
-  (add-hook 'mu4e-compose-mode-hook
-	    (defun my-add-bcc ()
-	      "Add myself in Bcc: header."
-	      (save-excursion (message-add-header (format "Bcc: %s\n" user-mail-address))))))
+	     user-mail-address "vadym.kochan@plvision.eu"))
 
 (defun mail/private ()
   (use-package smtpmail
