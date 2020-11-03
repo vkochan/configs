@@ -592,6 +592,8 @@
 
 	     (push '("conf-unix" . conf-unix) org-src-lang-modes))
 
+(use-package ox-pandoc)
+
 (use-package ov)
 
 (defun next-color-link (limit)
