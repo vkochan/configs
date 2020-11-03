@@ -495,17 +495,13 @@
 	       ("/[Gmail].Trash" . ?t)
 	       ("/[Gmail].Sent Mail" . ?s))
 	     mu4e-update-interval 60
+             mu4e-compose-keep-self-cc t
 	     mu4e-use-fancy-chars t
 	     mu4e-view-show-addresses t
 	     mu4e-view-show-images t
 	     message-send-mail-function 'smtpmail-send-it
 	     message-kill-buffer-on-exit t
-	     user-mail-address "vadim4j@gmail.com")
-
-  (add-hook 'mu4e-compose-mode-hook
-	    (defun my-add-bcc ()
-	      "Add myself in Bcc: header."
-	      (save-excursion (message-add-header (format "Bcc: %s\n" user-mail-address))))))
+	     user-mail-address "vadim4j@gmail.com"))
 
 ; (mail/work)
 (mail/private)
