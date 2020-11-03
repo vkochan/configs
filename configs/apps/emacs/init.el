@@ -503,8 +503,10 @@
 	     message-kill-buffer-on-exit t
 	     user-mail-address "vadim4j@gmail.com"))
 
-; (mail/work)
-(mail/private)
+(if (eq (getenv "MY_PROFILE") "work")
+    (mail/work)
+    ; else
+    (mail/private))
 
 (define-key mu4e-compose-mode-map (kbd "C-c C-x") 'mail-add-attachment)
 
