@@ -410,6 +410,8 @@
   "pa"  'projectile-add-known-project
   "pd"  'projectile-remove-known-project)
 
+(global-set-key (kbd "C-c p b") 'counsel-projectile-switch-to-buffer) 
+
 (defun dark/doom ()
   (interactive)
   (use-package doom-themes
