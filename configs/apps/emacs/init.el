@@ -149,7 +149,7 @@
   (general-create-definer my-leader-def
     :keymaps '(normal insert visual emacs)
     :prefix "SPC"
-    :global-prefix "SPC"))
+    :global-prefix "C-SPC"))
 
 ;; Global misc settings
 (setq-default tab-width 8)
@@ -401,7 +401,8 @@
   :after projectile
   :bind (
   :map projectile-command-map
-    ("b" . 'counsel-projectile-switch-to-buffer))
+    ("b" . 'counsel-projectile-switch-to-buffer)
+    ("p" . 'counsel-projectile-switch-project))
 )
 
 (my-leader-def
