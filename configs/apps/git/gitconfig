@@ -1,3 +1,6 @@
+[core]
+	abbrev = 12
+
 [user]
 	email = vadim4j@gmail.com
 	name = Vadym Kochan
