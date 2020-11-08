@@ -35,6 +35,7 @@
      "neomutt"
      "gcc-toolchain"
      "nss-certs"
+     "setxkbmap"
      "glibc-utf8-locales"
      "fontconfig"
      "gs-fonts"
