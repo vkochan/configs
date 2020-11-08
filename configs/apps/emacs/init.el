@@ -508,7 +508,7 @@
 	     message-kill-buffer-on-exit t
 	     user-mail-address "vadim4j@gmail.com"))
 
-(if (eq (getenv "MY_PROFILE") "work")
+(if (string= (getenv "MY_PROFILE") "work")
     (mail/work)
     ; else
     (mail/private))
