@@ -40,6 +40,7 @@
      "gs-fonts"
      "font-dejavu"
      "font-gnu-freefont-ttf"
+     "ghc-pandoc"
      "texlive"
      "texlive-beamer"
      "texlive-cm"
