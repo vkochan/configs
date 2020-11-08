@@ -514,6 +514,7 @@
     (mail/private))
 
 (define-key mu4e-compose-mode-map (kbd "C-c C-x") 'mail-add-attachment)
+(global-set-key (kbd "C-x m") 'mu4e)
 
 (defun my-mail-status (n) (format "(✉ %s)" n))
 
