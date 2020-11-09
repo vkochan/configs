@@ -696,6 +696,8 @@
 	     :hook ((prog-mode . git-gutter-mode)
 		    (org-mode . git-gutter-mode)))
 
+(global-git-gutter-mode +1)
+
 (add-to-list 'org-latex-packages-alist '("" "listings" nil))
 (add-to-list 'org-latex-packages-alist '("" "lmodern" t))
 (add-to-list 'org-latex-packages-alist '("" "color" t))
