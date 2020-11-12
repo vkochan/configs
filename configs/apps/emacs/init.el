@@ -457,6 +457,7 @@
 
   (setq	     mu4e-attachment-dir "~/Downloads"
 	     mu4e-confirm-quit nil
+	     mu4e-compose-dont-reply-to-self t
 	     mu4e-compose-signature-auto-include nil
 	     mu4e-get-mail-command "mbsync -a"
 	     mu4e-index-update-in-background t
@@ -526,6 +527,12 @@
 	     (mu4e-alert-modeline-formatter #'my-mail-status)
 	     (mu4e-alert-interesting-mail-query
 	       "flag:unread AND NOT flag:trashed"))
+
+(require 'mu4e-actions)
+(add-to-list 'mu4e-view-actions
+             '("GitApply" . mu4e-action-git-apply-patch) t)
+(add-to-list 'mu4e-view-actions
+             '("MboxGitApply" . mu4e-action-git-apply-mbox) t)
 
 (use-package doom-modeline
 	     :defer 0.5
