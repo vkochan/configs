@@ -97,3 +97,9 @@ nmap <Leader>bd :bd<CR>
 " how to cursor a line width
 " set cursorline
 " hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white
+
+" copy to buffer
+vmap <C-y> :w! ~/.vimbuffer<CR>
+nmap <C-y> :.w! ~/.vimbuffer<CR>
+" paste from buffer
+map <C-p> :r ~/.vimbuffer<CR>
