@@ -1,4 +1,8 @@
 -- load standard vis module, providing parts of the Lua API
+local plugins = {
+	['https://repo.or.cz/vis-goto-file.git'] = 'init',
+}
+
 require('vis')
 require('plugins/vis-plug').init(plugins, true)
 
