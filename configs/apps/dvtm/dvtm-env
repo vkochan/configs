@@ -1,0 +1,6 @@
+#!/bin/sh
+
+#export NNN_PLUG="f:dvtm"
+export NNN_OPENER="/home/${USER}/bin/dvtm-open"
+
+dvtm -c /var/run/user/${UID}/dvtm nnn
