@@ -6,7 +6,7 @@
 # Authors: Vadym Kochan <vadimj@gmail.com>
 
 if [ -z "${DVTM_CMD_FIFO}" ]; then
-    tig status
+    tig
 else
-    printf "create \"tig status\" \"git status\" \$CWD\n" > ${DVTM_CMD_FIFO}
+    printf "create tig git \$CWD\n" > ${DVTM_CMD_FIFO}
 fi

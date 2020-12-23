@@ -1,6 +1,6 @@
 #!/bin/sh
 
 export NNN_OPENER="${HOME}/.config/nnn/plugins/dvtm/open"
-export NNN_PLUG="s:dvtm/git-status"
+export NNN_PLUG="s:dvtm/git"
 
 ${HOME}/repo/dvtm-vk/dvtm -c /var/run/user/${UID}/dvtm nnn
