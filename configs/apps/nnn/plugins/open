@@ -14,4 +14,4 @@ if [ -z "$DVTM_CMD_FIFO" ]; then
 	exit 2
 fi
 
-printf "create \"$EDITOR $2/$1\" $1\n" > ${DVTM_CMD_FIFO}
+printf "create \"$EDITOR $2/$1\" $(basename $1) \$CWD\n" > ${DVTM_CMD_FIFO}
