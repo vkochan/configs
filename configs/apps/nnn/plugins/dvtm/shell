@@ -1,0 +1,18 @@
+#!/usr/bin/env sh
+
+# Description: open shell in dvtm
+#
+# Shell: POSIX compliant
+# Author: Vadym Kochan
+
+if [ -z "$DVTM_CMD_FIFO" ]; then
+	echo 'ERROR: $DVTM_CMD_FIFO is not set' | ${PAGER:-less}
+	exit 2
+fi
+
+sh=sh
+if [ -n "${SHELL}" ]; then
+    sh=${SHELL}
+fi
+
+printf "create $sh \"\" \$CWD\n" > ${DVTM_CMD_FIFO}
