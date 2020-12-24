@@ -103,3 +103,12 @@ vmap <C-y> :w! ~/.vimbuffer<CR>
 nmap <C-y> :.w! ~/.vimbuffer<CR>
 " paste from buffer
 map <C-p> :r ~/.vimbuffer<CR>
+
+function Open_in_dvtm()
+    if $DVTM_CMD_FIFO != ''
+        let vim = printf("vim %s +%d", expand('%:p'), line(".") + 1)
+	let cmd = printf("create \"%s\" \"%s\" $CWD", vim, expand('%:t'))
+        call writefile([printf("%s", cmd)], $DVTM_CMD_FIFO)
+    endif
+endfunction
+map <Leader>w :call Open_in_dvtm()<CR>
