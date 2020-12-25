@@ -14,4 +14,10 @@ if [ -z "$DVTM_CMD_FIFO" ]; then
 	exit 2
 fi
 
-printf "create \"$EDITOR $2/$1\" $(basename $1) \$CWD\n" > ${DVTM_CMD_FIFO}
+if [ -n "$2" ]; then
+    dir="$2/"
+else
+    dir=""
+fi
+
+printf "create \"$EDITOR ${dir}${1}\" $(basename $1) \$CWD\n" > ${DVTM_CMD_FIFO}
