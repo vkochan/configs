@@ -1,0 +1,27 @@
+#!/usr/bin/env sh
+
+# Description: Handles selected dir and changes dvtm's cwd
+#
+# Shell: POSIX compliant
+# Authors: Vadym Kochan <vadimj@gmail.com>
+
+if [ -z "$DVTM_CMD_FIFO" ]; then
+	echo 'ERROR: $DVTM_CMD_FIFO is not set' | ${PAGER:-less}
+	exit 2
+fi
+if [ -z "$NNN_FIFO" ]; then
+	echo 'ERROR: $NNN_FIFO is not set' | ${PAGER:-less}
+	exit 2
+fi
+
+CURRENT=""
+
+cat "$NNN_FIFO" |\
+	while read -r selected ; do
+		SELECTED="$(dirname ${selected})"
+
+		if [ "${CURRENT}" != "${SELECTED}" ]; then
+			CURRENT=${SELECTED}
+			echo "setcwd ${CURRENT}" > ${DVTM_CMD_FIFO}
+		fi
+	done
