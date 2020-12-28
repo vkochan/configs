@@ -14,7 +14,7 @@ trap 'rm -rf "$DVTM_RUN_PATH"' EXIT
 mkfifo ${DVTM_CMD_FIFO}
 mkfifo ${NNN_FIFO}
 
-export NNN_PLUG="f:dvtm/fzy-open;c:fzy-cd"
+export NNN_PLUG="f:dvtm/fzy-open;c:dvtm/fzy-cd"
 export NNN_OPENER="${NNN_DVTM_PLUG_DIR}/open"
 export PATH=${HOME}/repo/dvtm-vk:${PATH}
 export NNN_FIFO
