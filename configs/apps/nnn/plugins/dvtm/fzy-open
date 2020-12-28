@@ -16,4 +16,6 @@ fi
 
 sel=$(find -type f | fzy -s -l 20)
 
-printf "create \"$EDITOR $sel\" $(basename $sel) \$CWD\n" > ${DVTM_CMD_FIFO}
+if [ -n "${sel}" ]; then
+	printf "create \"$EDITOR $sel\" $(basename $sel) \$CWD\n" > ${DVTM_CMD_FIFO}
+fi
