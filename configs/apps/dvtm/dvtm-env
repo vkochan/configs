@@ -1,9 +1,10 @@
 #!/bin/sh
 
-NNN_DVTM_PLUG="${HOME}/.config/nnn/plugins/dvtm"
+NNN_PLUG_DIR="${HOME}/.config/nnn/plugins"
+NNN_DVTM_PLUG_DIR="${NNN_PLUG_DIR}/dvtm"
 
 DVTM_RUN_PATH=/var/run/user/${UID}/dvtm
-mkdir ${DVTM_RUN_PATH}
+mkdir -p ${DVTM_RUN_PATH}
 
 DVTM_CMD_FIFO=${DVTM_RUN_PATH}/cmd-$$
 NNN_FIFO=${DVTM_RUN_PATH}/nnn-$$
@@ -13,17 +14,20 @@ trap 'rm -rf "$DVTM_RUN_PATH"' EXIT
 mkfifo ${DVTM_CMD_FIFO}
 mkfifo ${NNN_FIFO}
 
-export NNN_PLUG="e:dvtm/editor;g:dvtm/git;f:dvtm/fzy-open;c:fzy-cd;x:dvtm/shell"
-export NNN_OPENER="${NNN_DVTM_PLUG}/open"
+export NNN_PLUG="f:dvtm/fzy-open;c:fzy-cd"
+export NNN_OPENER="${NNN_DVTM_PLUG_DIR}/open"
 export PATH=${HOME}/repo/dvtm-vk:${PATH}
 export NNN_FIFO
 export DVTM_CMD_FIFO
 
-${NNN_DVTM_PLUG}/setcwd &
+${NNN_DVTM_PLUG_DIR}/setcwd &
 NNN_SETCWD_PID=$!
 
 printf "setmfact 0.25\ncreate nnn\nsetsticky\n" > ${DVTM_CMD_FIFO} &
 
-${HOME}/repo/dvtm-vk/dvtm -c ${DVTM_CMD_FIFO}
+DVTM_GIT_CMD=$(printf "^Xg:c:create tig git")
+
+${HOME}/repo/dvtm-vk/dvtm -c ${DVTM_CMD_FIFO} \
+	-b "${DVTM_GIT_CMD}"
 
 kill ${NNN_SETCWD_PID} 2> /dev/null
