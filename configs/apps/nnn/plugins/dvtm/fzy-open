@@ -14,7 +14,11 @@ if [ -z "$DVTM_CMD_FIFO" ]; then
 	exit 2
 fi
 
+printf "setlayout \"[ ]\"\n" > ${DVTM_CMD_FIFO}
+
 sel=$(find -type f | fzy -s -l 20)
+
+printf "setlayout\n" > ${DVTM_CMD_FIFO}
 
 if [ -n "${sel}" ]; then
 	printf "create \"$EDITOR $sel\" $(basename $sel) \$CWD\n" > ${DVTM_CMD_FIFO}

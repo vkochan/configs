@@ -5,12 +5,20 @@
 # Shell: POSIX compliant
 # Author: Vadym Kochan
 
+if [ -z "$DVTM_CMD_FIFO" ]; then
+	echo 'ERROR: $DVTM_CMD_FIFO is not set' | ${PAGER:-less}
+	exit 2
+fi
 if [ -z "$NNN_PIPE" ]; then
 	echo 'ERROR: $NNN_PIPE is not set' | ${PAGER:-less}
 	exit 2
 fi
 
+printf "setlayout \"[ ]\"\n" > ${DVTM_CMD_FIFO}
+
 sel=$(find -type d | fzy -s -l 20)
+
+printf "setlayout\n" > ${DVTM_CMD_FIFO}
 
 if [ -n "${sel}" ]; then
 	path=$(readlink -f $sel)
