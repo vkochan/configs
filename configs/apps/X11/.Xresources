@@ -1,3 +1,9 @@
+Xft.dpi:                    96
+Xft.antialias:              false
+Xft.rgba:                   rgb
+Xft.hinting:                true
+Xft.hintstyle:              hintslight
+
 st.alpha: 200
 st.font: Monospace-11;
 st.color0: black
@@ -5,3 +11,17 @@ st.color15: green
 
 URxvt*background: black
 URxvt*foreground: green
+
+URxvt.depth:                32
+URxvt.geometry:             90x30
+URxvt.transparent:          false
+URxvt.fading:               0
+
+! Fonts
+! URxvt.allow_bold:           false
+! /* URxvt.font:                 -*-terminus-medium-r-normal-*-12-120-72-72-c-60-iso8859-1 */
+URxvt*font: xft:Monospace:pixelsize=14
+URxvt*boldFont: xft:Monospace:pixelsize=14
+!
+! Fix font space
+URxvt*letterSpace: -1
