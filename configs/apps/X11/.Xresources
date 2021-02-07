@@ -2,3 +2,6 @@ st.alpha: 200
 st.font: Monospace-11;
 st.color0: black
 st.color15: green
+
+URxvt*background: black
+URxvt*foreground: green
