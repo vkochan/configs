@@ -1,5 +1,5 @@
 # theme
-source ~/.mutt/mutt-colors-solarized/mutt-colors-solarized-dark-16.muttrc
+source ~/.mutt/mutt-colors-neonwolf/mutt-colors-neonwolf-256.muttrc
 
 # email settings
 set from = vadim4j@gmail.com
