@@ -32,10 +32,12 @@ set include
 set visual = vim
 set my_name = "Vadym Kochan"
 set edit_headers = yes
-set sort="threads"
+#set sort="threads"
 #set strict_threads="yes"
 set sort_browser="reverse-date"
 set record="=Sent"
+set sort_aux = last-date-received                           
+set sort = reverse-threads
 
 # changing folders ----------------------------------------------------
 macro index,pager gi "<change-folder>!<enter>" "Go to inbox"
