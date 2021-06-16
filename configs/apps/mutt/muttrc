@@ -150,3 +150,5 @@ bind index L limit
 set forward_format = "Fwd: %s"       # format of subject when forwarding
 set forward_decode                   # decode when forwarding
 my_hdr BCc: <vadim4j@gmail.com>
+
+macro index @ '| git am -s'\n
