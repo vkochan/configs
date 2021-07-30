@@ -712,6 +712,15 @@
 (setq org-latex-listings-options '(("breaklines" "true")))
 (setq org-latex-listings t)
 
+(use-package perspective
+  :demand t
+  :custom
+  (persp-initial-frame-name "Main")
+  :config
+  ;; Running `persp-mode' multiple times resets the perspective list...
+  (unless (equal persp-mode t)
+    (persp-mode)))
+
 ;;(setq-default tab-always-indent 'complete)
 
 ;; example of a function that just insert a tab char
