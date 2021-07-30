@@ -714,6 +714,8 @@
 
 (use-package perspective
   :demand t
+  :bind
+  ("C-x C-b" . persp-counsel-switch-buffer)
   :custom
   (persp-initial-frame-name "Main")
   :config
