@@ -1,6 +1,6 @@
 ;; The default is 800 kilobytes.  Measured in bytes.
 (setq gc-cons-threshold (* 50 1000 1000))
-
+(setq make-backup-files nil)
 ;; Profile emacs startup
 (add-hook 'emacs-startup-hook
   (lambda ()
@@ -407,7 +407,7 @@
 
 (my-leader-def
   "pf"  'counsel-projectile-find-file
-  "ps"  'counsel-projectile-switch-project
+  "ps"  'projectile-persp-switch-project
   "pp"  'counsel-projectile
   "pc"  'projectile-compile-project
   "po"  'projectile-dired
@@ -500,7 +500,7 @@
 	       ("/[Gmail].All Mail" . ?a)
 	       ("/[Gmail].Trash" . ?t)
 	       ("/[Gmail].Sent Mail" . ?s))
-	     mu4e-update-interval 60
+	     mu4e-update-interval 600
              mu4e-compose-keep-self-cc t
 	     mu4e-use-fancy-chars t
 	     mu4e-view-show-addresses t
@@ -675,6 +675,9 @@
   (interactive)
   (counsel-rg "" "~/notes" nil "Search Notes: "))
 
+(setq org-todo-keywords
+      '((sequence "TODO" "IN-PROGRESS" "DONE")))
+
 (use-package evil-org
 	     :after org
 	     :hook ((org-mode . evil-org-mode)
@@ -714,14 +717,14 @@
 
 (use-package perspective
   :demand t
-  :bind
-  ("C-x C-b" . persp-counsel-switch-buffer)
   :custom
   (persp-initial-frame-name "Main")
   :config
   ;; Running `persp-mode' multiple times resets the perspective list...
   (unless (equal persp-mode t)
     (persp-mode)))
+
+(require 'persp-projectile)
 
 ;;(setq-default tab-always-indent 'complete)
 
@@ -765,3 +768,18 @@
 		(setq indent-tabs-mode t)
 		(setq show-trailing-whitespace t)
 		(c-set-style "linux-tabs-only"))))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(org-agenda-files '("~/notes/home/tasks.org"))
+ '(package-selected-packages
+   '(persp-projectile perspective which-key wgrep vterm use-package telega spacegray-theme smex ox-pandoc ov org-journal org-bullets multi-term mu4e-alert magit-todos ivy-hydra helpful git-gutter-fringe general flx evil-org evil-magit evil-collection doom-themes doom-modeline dired-single dired-ranger dired-rainbow dired-collapse diminish counsel-projectile company alect-themes))
+ '(warning-suppress-log-types '((ivy))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
