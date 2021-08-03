@@ -692,6 +692,22 @@
 (setq org-todo-keywords
       '((sequence "TODO" "IN-PROGRESS" "DONE")))
 
+(setq org-babel-load-languages
+      '((awk        . t)
+        (emacs-lisp . t)
+        (gnuplot    . t)
+        (org        . t)
+        (python     . t)
+        (scheme     . t)
+        (shell      . t)
+        (dot        . t)
+        (sql        . t)))
+
+;; Activate Babel languages
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ org-babel-load-languages)
+
 (use-package evil-org
 	     :after org
 	     :hook ((org-mode . evil-org-mode)
