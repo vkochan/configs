@@ -653,6 +653,20 @@
 (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'my/org-babel-tangle-dont-ask
 					      'run-at-end 'only-in-org-mode)))
 
+(defun set-buffer-variable-pitch ()
+  (interactive)
+  (variable-pitch-mode t)
+  (setq line-spacing 3)
+  (set-face-attribute 'org-table nil :inherit 'fixed-pitch)
+  (set-face-attribute 'org-link nil :inherit 'fixed-pitch)
+  (set-face-attribute 'org-code nil :inherit 'fixed-pitch)
+  (set-face-attribute 'org-block nil :inherit 'fixed-pitch)
+  (set-face-attribute 'org-date nil :inherit 'fixed-pitch)
+  (set-face-attribute 'org-special-keyword nil :inherit 'fixed-pitch)
+  )
+
+(add-hook 'org-mode-hook 'set-buffer-variable-pitch)
+
 (use-package org-bullets
 	     :after org
 	     :hook (org-mode . org-bullets-mode)
@@ -776,7 +790,7 @@
  '(org-agenda-files '("~/notes/home/tasks.org"))
  '(package-selected-packages
    '(persp-projectile perspective which-key wgrep vterm use-package telega spacegray-theme smex ox-pandoc ov org-journal org-bullets multi-term mu4e-alert magit-todos ivy-hydra helpful git-gutter-fringe general flx evil-org evil-magit evil-collection doom-themes doom-modeline dired-single dired-ranger dired-rainbow dired-collapse diminish counsel-projectile company alect-themes))
- '(warning-suppress-log-types '((ivy))))
+ '(warning-suppress-log-types '((comp))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
