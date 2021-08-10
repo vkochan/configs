@@ -514,6 +514,13 @@
     ; else
     (mail/private))
 
+(add-to-list 'mu4e-bookmarks
+             (make-mu4e-bookmark
+              :name  "To Myself"
+              :query (lambda () (concat "maildir:/inbox and (to:" user-mail-address " or cc:" user-mail-address))
+              :key ?y)
+             )
+
 (define-key mu4e-compose-mode-map (kbd "C-c C-x") 'mail-add-attachment)
 (global-set-key (kbd "C-x m") 'mu4e)
 
@@ -653,6 +660,22 @@
 (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'my/org-babel-tangle-dont-ask
 					      'run-at-end 'only-in-org-mode)))
 
+(setq org-babel-load-languages
+      '((awk        . t)
+        (emacs-lisp . t)
+        (gnuplot    . t)
+        (org        . t)
+        (python     . t)
+        (scheme     . t)
+        (shell      . t)
+        (dot        . t)
+        (sql        . t)))
+
+;; Activate Babel languages
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ org-babel-load-languages)
+
 (defun set-buffer-variable-pitch ()
   (interactive)
   (variable-pitch-mode t)
@@ -691,22 +714,6 @@
 
 (setq org-todo-keywords
       '((sequence "TODO" "IN-PROGRESS" "DONE")))
-
-(setq org-babel-load-languages
-      '((awk        . t)
-        (emacs-lisp . t)
-        (gnuplot    . t)
-        (org        . t)
-        (python     . t)
-        (scheme     . t)
-        (shell      . t)
-        (dot        . t)
-        (sql        . t)))
-
-;; Activate Babel languages
-(org-babel-do-load-languages
- 'org-babel-load-languages
- org-babel-load-languages)
 
 (use-package evil-org
 	     :after org
@@ -798,6 +805,10 @@
 		(setq indent-tabs-mode t)
 		(setq show-trailing-whitespace t)
 		(c-set-style "linux-tabs-only"))))
+
+(require 'bash-completion)
+(bash-completion-setup)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -805,7 +816,7 @@
  ;; If there is more than one, they won't work right.
  '(org-agenda-files '("~/notes/home/tasks.org"))
  '(package-selected-packages
-   '(persp-projectile perspective which-key wgrep vterm use-package telega spacegray-theme smex ox-pandoc ov org-journal org-bullets multi-term mu4e-alert magit-todos ivy-hydra helpful git-gutter-fringe general flx evil-org evil-magit evil-collection doom-themes doom-modeline dired-single dired-ranger dired-rainbow dired-collapse diminish counsel-projectile company alect-themes))
+   '(bash-completion persp-projectile perspective which-key wgrep vterm use-package telega spacegray-theme smex ox-pandoc ov org-journal org-bullets multi-term mu4e-alert magit-todos ivy-hydra helpful git-gutter-fringe general flx evil-org evil-magit evil-collection doom-themes doom-modeline dired-single dired-ranger dired-rainbow dired-collapse diminish counsel-projectile company alect-themes))
  '(warning-suppress-log-types '((comp))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
