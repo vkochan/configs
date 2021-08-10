@@ -517,7 +517,7 @@
 (add-to-list 'mu4e-bookmarks
              (make-mu4e-bookmark
               :name  "To Myself"
-              :query (lambda () (concat "maildir:/inbox and (to:" user-mail-address " or cc:" user-mail-address))
+              :query (lambda () (concat "maildir:/inbox and (to:" user-mail-address " or cc:" user-mail-address ")"))
               :key ?y)
              )
 
