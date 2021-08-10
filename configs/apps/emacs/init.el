@@ -705,6 +705,27 @@
 
 (setq org-directory "~/notes")
 
+(setq org-agenda-files (list "inbox.org"))
+
+(setq org-capture-templates
+       `(("i" "Inbox" entry  (file "inbox.org")
+        ,(concat "* TODO %?\n"
+                 "/Entered on/ %U"))))
+
+(define-key global-map (kbd "C-x c") 'org-capture)
+
+(setq org-capture-templates
+      `(("i" "Inbox" entry  (file "inbox.org")
+        ,(concat "* TODO %?\n"
+                 "/Entered on/ %U"))
+        ("@" "Inbox [mu4e]" entry (file "inbox.org")
+        ,(concat "* TODO Process \"%a\" %?\n"
+                 "/Entered on/ %U"))))
+
+(define-key mu4e-headers-mode-map (kbd "C-x c") 'mu4e-org-store-and-capture)
+(define-key mu4e-view-mode-map    (kbd "C-x c") 'mu4e-org-store-and-capture)
+(define-key global-map (kbd "C-x a") 'org-agenda)
+
 (defun my/org-path (path)
   (expand-file-name path org-directory))
 
