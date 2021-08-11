@@ -709,7 +709,9 @@
 
 (setq org-directory "~/notes")
 
-(setq org-agenda-files (list "inbox.org"))
+(setq org-agenda-files
+      (mapcar 'file-truename
+          (file-expand-wildcards "~/notes/*/*.org" "~/notes/*.org")))
 
 (setq org-capture-templates
        `(("i" "Inbox" entry  (file "inbox.org")
@@ -839,7 +841,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(org-agenda-files '("~/notes/home/tasks.org"))
  '(package-selected-packages
    '(bash-completion persp-projectile perspective which-key wgrep vterm use-package telega spacegray-theme smex ox-pandoc ov org-journal org-bullets multi-term mu4e-alert magit-todos ivy-hydra helpful git-gutter-fringe general flx evil-org evil-magit evil-collection doom-themes doom-modeline dired-single dired-ranger dired-rainbow dired-collapse diminish counsel-projectile company alect-themes))
  '(warning-suppress-log-types '((comp))))
