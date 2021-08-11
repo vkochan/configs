@@ -310,8 +310,7 @@
   (dired-rainbow-define-chmod executable-unix "#38c172" "-.*x.*"))
 
 (use-package dired-single
-  :ensure t
-  :defer t)
+  :ensure t :defer t)
 
 (use-package dired-ranger
   :defer t)
@@ -319,8 +318,13 @@
 (use-package dired-collapse
   :defer t)
 
+(defun my-dired-single-up-directory ()
+  (interactive)
+  (dired-single-buffer "..")
+  )
+
 (evil-collection-define-key 'normal 'dired-mode-map
-  "h" 'dired-single-up-directory
+  "h" 'my-dired-single-up-directory
   "H" 'dired-omit-mode
   "l" 'dired-single-buffer
   "y" 'dired-ranger-copy
