@@ -371,7 +371,7 @@
 
 ;; Add a super-convenient global binding for magit-status since
 ;; I use it 8 million times a day
-(global-set-key (kbd "C-M-;") 'magit-status)
+(global-set-key (kbd "C-x g") 'magit-status)
 
 (my-leader-def
   "g"   '(:ignore t :which-key "git")
