@@ -711,7 +711,7 @@
 
 (setq org-agenda-files
       (mapcar 'file-truename
-          (file-expand-wildcards "~/notes/*/*.org" "~/notes/*.org")))
+          (append '("~/notes/inbox.org") (file-expand-wildcards "~/notes/*/*.org" "~/notes/inbox.org"))))
 
 (setq org-capture-templates
        `(("i" "Inbox" entry  (file "inbox.org")
@@ -732,6 +732,50 @@
 (define-key mu4e-view-mode-map    (kbd "C-x c") 'mu4e-org-store-and-capture)
 (define-key global-map (kbd "C-x a") 'org-agenda)
 
+(setq org-log-done 'time)
+
+;; Agenda
+(setq org-agenda-custom-commands
+      '(("g" "Get Things Done (GTD)"
+         ((agenda ""
+                  ((org-agenda-skip-function
+                    '(org-agenda-skip-entry-if 'deadline))
+                   (org-deadline-warning-days 0)))
+          (todo "IN-PROGRESS"
+                ((org-agenda-skip-function
+                  '(org-agenda-skip-entry-if 'deadline))
+                 (org-agenda-prefix-format "  %i %-12:c [%e] ")
+                 (org-agenda-overriding-header "\nIn-progress\n")))
+          (todo "NEXT"
+                ((org-agenda-skip-function
+                  '(org-agenda-skip-entry-if 'deadline))
+                 (org-agenda-prefix-format "  %i %-12:c [%e] ")
+                 (org-agenda-overriding-header "\nNext\n")))
+          (tags-todo "inbox"
+                     ((org-agenda-prefix-format "  %?-12t% s")
+                      (org-agenda-overriding-header "\nInbox\n")))
+          (tags "CLOSED>=\"<today>\""
+                ((org-agenda-overriding-header "\nCompleted today\n")))))))
+
+;; Save the corresponding buffers
+(defun gtd-save-org-buffers ()
+  "Save `org-agenda-files' buffers without user confirmation.
+See also `org-save-all-org-buffers'"
+  (interactive)
+  (message "Saving org-agenda-files buffers...")
+  (save-some-buffers t (lambda () 
+             (when (member (buffer-file-name) org-agenda-files) 
+               t)))
+  (message "Saving org-agenda-files buffers... done"))
+
+;; Add it after refile
+(advice-add 'org-refile :after
+        (lambda (&rest _)
+          (gtd-save-org-buffers)))
+
+(setq org-refile-use-outline-path 'file)
+(setq org-outline-path-complete-in-steps nil)
+
 (defun my/org-path (path)
   (expand-file-name path org-directory))
 
@@ -740,7 +784,7 @@
   (counsel-rg "" "~/notes" nil "Search Notes: "))
 
 (setq org-todo-keywords
-      '((sequence "TODO" "IN-PROGRESS" "DONE")))
+      '((sequence "TODO" "NEXT" "IN-PROGRESS" "DONE")))
 
 (use-package evil-org
 	     :after org
