@@ -754,6 +754,10 @@
           (tags-todo "inbox"
                      ((org-agenda-prefix-format "  %?-12t% s")
                       (org-agenda-overriding-header "\nInbox\n")))
+          (tags (concat "+TODO=\"DONE\"" "+CLOSED>=\""
+                        (format-time-string "[%Y-%m-%d]" (time-subtract (current-time) (days-to-time 14)))
+                        "\"")
+                ((org-agenda-overriding-header "\nCompleted 2 weeks ago\n")))
           (tags "CLOSED>=\"<today>\""
                 ((org-agenda-overriding-header "\nCompleted today\n")))))))
 
