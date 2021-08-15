@@ -619,6 +619,7 @@
 	     (push '("conf-unix" . conf-unix) org-src-lang-modes))
 
 (use-package ox-pandoc)
+(use-package org-journal)
 
 (use-package ov)
 
