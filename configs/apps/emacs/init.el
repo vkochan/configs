@@ -217,13 +217,23 @@
   :after hydra)
 
 (use-package counsel
-  :bind (("M-x" . counsel-M-x)
-         ("C-x b" . persp-counsel-switch-buffer)
-         ("C-x C-f" . counsel-find-file)
+  :bind (("M-x" . counsel-M-\x)
   :map minibuffer-local-map
     ("C-r" . 'counsel-minibuffer-history))
   :config
-    (setq ivy-initial-inputs-alist nil)) ;; Don't start searches with ^
+  (setq ivy-initial-inputs-alist nil) ;; Don't start searches with ^
+  (bind-keys :prefix-map my-files-map
+             :prefix "C-x f"
+             ("f" . counsel-find-file)
+             ("r" . counsel-recentf)
+             ("j" . counsel-file-jump)
+             :map global-map)
+  (bind-keys :prefix-map my-buffers-map
+             :prefix "C-x b"
+             ("b" . persp-counsel-switch-buffer)
+             ("l" . persp-list-buffers)
+             :map global-map)
+) 
 
 (use-package flx  ;; Improves sorting for fuzzy-matched results
   :defer t
@@ -364,30 +374,16 @@
 (use-package magit
   :commands (magit-status magit-get-current-branch)
   :custom
-  (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
+  (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
+  :bind-keymap
+  ("C-x g" . magit-mode-map)
+  :bind(
+  :map magit-mode-map
+  ("s" . 'magit-status))
+)
 
 (use-package evil-magit
   :after magit)
-
-;; Add a super-convenient global binding for magit-status since
-;; I use it 8 million times a day
-(global-set-key (kbd "C-x g") 'magit-status)
-
-(my-leader-def
-  "g"   '(:ignore t :which-key "git")
-  "gB"  'magit-blame
-  "gs"  'magit-status
-  "gd"  'magit-diff-unstaged
-  "gc"  'magit-branch-or-checkout
-  "gl"   '(:ignore t :which-key "log")
-  "glc" 'magit-log-current
-  "glf" 'magit-log-buffer-file
-  "gb"  'magit-branch
-  "gP"  'magit-push-current
-  "gp"  'magit-pull-branch
-  "gf"  'magit-fetch
-  "gF"  'magit-fetch-all
-  "gr"  'magit-rebase)
 
 (use-package forge
   :disabled)
@@ -399,7 +395,7 @@
   :diminish projectile-mode
   :config (projectile-mode)
   :bind-keymap
-  ("C-c p" . projectile-command-map))
+  ("C-x p" . projectile-command-map))
 
 (use-package counsel-projectile
   :after projectile
@@ -408,16 +404,6 @@
     ("b" . 'counsel-projectile-switch-to-buffer)
     ("p" . 'counsel-projectile-switch-project))
 )
-
-(my-leader-def
-  "pf"  'counsel-projectile-find-file
-  "ps"  'projectile-persp-switch-project
-  "pp"  'counsel-projectile
-  "pc"  'projectile-compile-project
-  "po"  'projectile-dired
-  "pg"  'projectile-grep
-  "pa"  'projectile-add-known-project
-  "pd"  'projectile-remove-known-project)
 
 (defun dark/doom ()
   (interactive)
