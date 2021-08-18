@@ -375,7 +375,8 @@
   :commands (magit-status magit-get-current-branch)
   :custom
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
-  (magit-file-mode-map magit-mode-map)
+  :config
+  (global-magit-file-mode -1)
   :bind-keymap
   ("C-x g" . magit-mode-map)
   :bind(
