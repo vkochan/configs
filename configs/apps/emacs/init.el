@@ -726,7 +726,7 @@
 
 (setq org-agenda-files
       (mapcar 'file-truename
-          (append '("~/notes/inbox.org") (file-expand-wildcards "~/notes/*/*.org" "~/notes/inbox.org"))))
+          (append '("~/notes/inbox.org" "~/notes/events.org") (file-expand-wildcards "~/notes/*/*.org" "~/notes/inbox.org"))))
 
 (setq org-capture-templates
        `(("i" "Inbox" entry  (file "inbox.org")
