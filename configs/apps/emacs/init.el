@@ -333,10 +333,34 @@
   (dired-single-buffer "..")
   )
 
+(defun my-dired-single-buffer (&optional default-dirname)
+  (interactive)
+  ;; use arg passed in or find name of current line
+  (let ((name (or default-dirname (dired-get-filename nil t))))
+    ;; See if the selection is a directory or not.
+    ;; assume directory if arg passed in
+    (cond ((or default-dirname
+               (and (dired-file-name-at-point)
+                    (file-directory-p (dired-file-name-at-point))))
+           ;; save current buffer's name
+           (let ((current-buffer-name (buffer-name)))
+             ;; go ahead and read in the directory
+             (find-alternate-file name)
+             ;; if the saved buffer's name was the magic name, rename this buffer
+             (if (and dired-single-use-magic-buffer
+                      (string= current-buffer-name dired-single-magic-buffer-name))
+                 (rename-buffer dired-single-magic-buffer-name))))
+          ;; Not looking at a header, it must be just a file
+          ((and name
+                (save-match-data
+                  (not (and (string-match "^  \\(.*\\):$" name)
+                            (file-name-absolute-p (match-string 1))))))
+           (find-file-other-window name)))))
+
 (evil-collection-define-key 'normal 'dired-mode-map
   "h" 'my-dired-single-up-directory
   "H" 'dired-omit-mode
-  "l" 'dired-single-buffer
+  "l" 'my-dired-single-buffer
   "y" 'dired-ranger-copy
   "X" 'dired-ranger-move
   "p" 'dired-ranger-paste)
